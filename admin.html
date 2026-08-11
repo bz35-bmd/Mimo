@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة الإدارة — ميمو منصتي</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23141419'/%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M25 84 C 25 58, 29 40, 34 20' stroke='%23A29BFE' stroke-width='8'/%3E%3Cpath d='M66 20 C 71 40, 75 58, 75 84' stroke='%236C5CE7' stroke-width='8'/%3E%3Cpath d='M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20' stroke='%23F9CA24' stroke-width='8'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -81,11 +82,12 @@ img { max-width:100%; display:block; }
 }
 .admin-topbar-left { display:flex; align-items:center; gap:14px; }
 .admin-topbar .logo-icon {
-  width:auto; height:36px; padding:0 12px; border-radius:var(--r-sm);
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  width:36px; height:36px; border-radius:12px;
+  background:#141419; border:1px solid rgba(255,255,255,.1);
   display:flex; align-items:center; justify-content:center;
-  font-size:.82rem; color:#fff; font-weight:800; letter-spacing:1px;
 }
+html[data-theme="light"] .admin-topbar .logo-icon { background:#fff; border-color:rgba(0,0,0,.08); }
+.admin-topbar .logo-icon svg { width:23px; height:23px; display:block; }
 .admin-topbar h1 { font-size:1.1rem; }
 .admin-topbar-right { display:flex; align-items:center; gap:12px; }
 .admin-topbar a, .admin-topbar button {
@@ -224,6 +226,46 @@ img { max-width:100%; display:block; }
   .admin-topbar { padding:12px 4vw; }
   .admin-topbar h1 { font-size:.95rem; }
 }
+
+/* STATISTIQUES */
+.stats-wrap {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-xl); padding:24px; margin-bottom:32px;
+}
+.stats-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+.stats-head h2 { font-size:1.2rem; }
+.stats-refresh {
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid var(--border); background:var(--surface);
+  color:var(--text-secondary); font-size:1rem;
+  transition:all .25s;
+}
+.stats-refresh:hover { border-color:var(--accent); color:var(--accent); transform:rotate(180deg); }
+.stats-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:22px; }
+.stat-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-md); padding:16px 12px; text-align:center;
+}
+.stat-card .stat-icon { font-size:1.25rem; }
+.stat-card .stat-num { font-size:1.6rem; font-weight:700; color:var(--accent); margin:4px 0 2px; }
+.stat-card .stat-label { font-size:.74rem; color:var(--text-muted); }
+.stats-charts { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-bottom:16px; }
+.chart-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r-md); padding:16px;
+}
+.chart-card h3 { font-size:.9rem; margin-bottom:12px; color:var(--text-secondary); }
+.chart-bars { display:flex; align-items:flex-end; gap:2px; height:130px; }
+.chart-col { flex:1; height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; min-width:0; }
+.chart-bar {
+  width:100%; max-width:22px; min-height:2px; position:relative;
+  border-radius:5px 5px 0 0;
+  background:linear-gradient(180deg,var(--accent-2),var(--accent));
+  transition:height .4s;
+}
+.chart-val { position:absolute; top:-16px; left:50%; transform:translateX(-50%); font-size:.6rem; color:var(--text-muted); white-space:nowrap; }
+.chart-label { font-size:.58rem; color:var(--text-muted); margin-top:5px; white-space:nowrap; overflow:hidden; }
+.stats-hint { text-align:center; color:var(--text-muted); font-size:.76rem; margin-top:14px; }
 </style>
 </head>
 <body>
@@ -231,7 +273,26 @@ img { max-width:100%; display:block; }
 <!-- TOPBAR -->
 <header class="admin-topbar">
   <div class="admin-topbar-left">
-    <a href="index.html" class="logo-icon" style="cursor:pointer">M</a>
+    <a href="index.html" class="logo-icon" style="cursor:pointer" aria-label="Mimo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="aR1" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6C5CE7"/><stop offset="100%" stop-color="#A29BFE"/>
+          </linearGradient>
+          <linearGradient id="aR2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/>
+          </linearGradient>
+          <linearGradient id="aR3" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round">
+          <path d="M25 84 C 25 58, 29 40, 34 20" stroke="url(#aR1)" stroke-width="8"/>
+          <path d="M66 20 C 71 40, 75 58, 75 84" stroke="url(#aR3)" stroke-width="8"/>
+          <path d="M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20" stroke="url(#aR2)" stroke-width="8"/>
+        </g>
+      </svg>
+    </a>
     <h1>لوحة الإدارة</h1>
   </div>
   <div class="admin-topbar-right">
@@ -259,6 +320,20 @@ img { max-width:100%; display:block; }
     <button class="product-btn" id="adminLoginBtn">دخول الإدارة</button>
   </div>
   <div id="adminContent" class="hidden">
+    <div class="stats-wrap" id="statsSection">
+      <div class="stats-head">
+        <h2 id="statsTitle">الإحصائيات</h2>
+        <button class="stats-refresh" onclick="loadStats()" title="↻" aria-label="Refresh">↻</button>
+      </div>
+      <div class="stats-cards" id="statsCards"></div>
+      <div class="stats-charts">
+        <div class="chart-card"><h3 id="chartVisitsTitle">الزيارات</h3><div class="chart-bars" id="chartVisits"></div></div>
+        <div class="chart-card"><h3 id="chartLoginsTitle">عمليات الدخول</h3><div class="chart-bars" id="chartLogins"></div></div>
+        <div class="chart-card"><h3 id="chartCommentsTitle">التعليقات</h3><div class="chart-bars" id="chartComments"></div></div>
+      </div>
+      <div class="chart-card"><h3 id="chartMonthTitle">الزيارات — آخر 6 أشهر</h3><div class="chart-bars" id="chartMonth"></div></div>
+      <p class="stats-hint" id="statsHint">(تظهر الأرقام بعد جمع البيانات)</p>
+    </div>
     <div class="admin-biz-tabs" id="adminBizTabs"></div>
     <div class="admin-grid" id="adminGrid"></div>
   </div>
@@ -329,7 +404,20 @@ const T = {
   admin_products:{ar:'المنتجات',fr:'Produits',en:'Products'},
   admin_articles:{ar:'المقالات',fr:'Articles',en:'Articles'},
   admin_add_article:{ar:'إضافة مقال',fr:'Ajouter article',en:'Add article'},
-  back_to_platform:{ar:'العودة للمنصة',fr:'Retour à la plateforme',en:'Back to platform'}
+  back_to_platform:{ar:'العودة للمنصة',fr:'Retour à la plateforme',en:'Back to platform'},
+  stats_title:{ar:'الإحصائيات',fr:'Statistiques',en:'Statistics'},
+  stats_users:{ar:'عملاء مسجّلون',fr:'Clients inscrits',en:'Registered clients'},
+  stats_online:{ar:'متصلون الآن',fr:'Connectés maintenant',en:'Online now'},
+  stats_visits_today:{ar:'زيارات اليوم',fr:'Visites aujourd\'hui',en:'Visits today'},
+  stats_visitors_today:{ar:'زوار اليوم',fr:'Visiteurs aujourd\'hui',en:'Visitors today'},
+  stats_visits_month:{ar:'زيارات الشهر',fr:'Visites ce mois',en:'Visits this month'},
+  stats_logins_month:{ar:'دخول الشهر',fr:'Connexions ce mois',en:'Logins this month'},
+  stats_comments_month:{ar:'تعليقات الشهر',fr:'Commentaires ce mois',en:'Comments this month'},
+  stats_chart_visits:{ar:'الزيارات — آخر 30 يومًا',fr:'Visites — 30 derniers jours',en:'Visits — last 30 days'},
+  stats_chart_logins:{ar:'عمليات الدخول — آخر 30 يومًا',fr:'Connexions — 30 derniers jours',en:'Logins — last 30 days'},
+  stats_chart_comments:{ar:'التعليقات — آخر 30 يومًا',fr:'Commentaires — 30 derniers jours',en:'Comments — last 30 days'},
+  stats_last6m:{ar:'الزيارات — آخر 6 أشهر',fr:'Visites — 6 derniers mois',en:'Visits — last 6 months'},
+  stats_empty_hint:{ar:'(تظهر الأرقام بعد جمع البيانات من الموقع)',fr:'(Les chiffres apparaissent après collecte des données du site)',en:'(Figures appear once site data is collected)'}
 };
 
 /* ======================================================
@@ -373,6 +461,13 @@ function applyLanguage(lang){
   document.getElementById('loginModalTitle').textContent=T.admin_login[lang];
   document.getElementById('adminLoginBtn').textContent=T.admin_login[lang];
   document.querySelector('.admin-topbar-right a').textContent=T.back_to_platform[lang];
+  document.getElementById('statsTitle').textContent=T.stats_title[lang];
+  document.getElementById('chartVisitsTitle').textContent=T.stats_chart_visits[lang];
+  document.getElementById('chartLoginsTitle').textContent=T.stats_chart_logins[lang];
+  document.getElementById('chartCommentsTitle').textContent=T.stats_chart_comments[lang];
+  document.getElementById('chartMonthTitle').textContent=T.stats_last6m[lang];
+  document.getElementById('statsHint').textContent=T.stats_empty_hint[lang];
+  if(isAdmin&&lastStats) renderStats(lastStats);
   html.setAttribute('lang',lang);
   html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
   renderAdminTabs();
@@ -445,15 +540,25 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
   e.preventDefault(); if(!sb){alert('يرجى ربط قاعدة البيانات أولًا');return;}
   const {error}=await sb.auth.signInWithPassword({email:document.getElementById('loginEmail').value,password:document.getElementById('loginPassword').value});
   if(error){alert('خطأ: '+error.message);return;}
-  isAdmin=true; closeLoginModal(); showAdminContent();
+  closeLoginModal();
 });
-async function logout(){if(sb)await sb.auth.signOut();isAdmin=false;hideAdminContent();}
+async function logout(){if(sb)await sb.auth.signOut();}
+
+function restoreSession(){
+  if(!sb) return;
+  sb.auth.onAuthStateChange((event,session)=>{
+    if(session&&session.user&&(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED')){
+      isAdmin=true; showAdminContent();
+    }
+    if(event==='SIGNED_OUT'){ isAdmin=false; hideAdminContent(); }
+  });
+}
 
 function showAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
   lp.innerHTML=`<button class="product-btn" onclick="logout()">${T.admin_logout[currentLang]}</button>`;
   ct.classList.remove('hidden');
-  renderAdminTabs(); renderAdminGrid();
+  renderAdminTabs(); renderAdminGrid(); loadStats();
 }
 function hideAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
@@ -461,6 +566,95 @@ function hideAdminContent(){
   ct.classList.add('hidden');
 }
 document.getElementById('adminLoginBtn').addEventListener('click',openLoginModal);
+
+/* ======================================================
+   STATISTIQUES — visiteurs, connexions, commentaires
+   ====================================================== */
+let lastStats=null;
+function dateKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function monthKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
+function monthLabel(d,lang){
+  try{ return d.toLocaleDateString(lang==='ar'?'ar-DZ':lang==='fr'?'fr-FR':'en-US',{month:'short'}); }catch(e){ return ''; }
+}
+async function countQuery(q){
+  try{ const {count,error}=await q; return error?0:(count||0); }catch(e){ return 0; }
+}
+async function loadStats(){
+  if(!sb) return;
+  const now=new Date();
+  const isoToday=new Date(now.getFullYear(),now.getMonth(),now.getDate()).toISOString();
+  const isoMonth=new Date(now.getFullYear(),now.getMonth(),1).toISOString();
+  const iso180=new Date(now.getTime()-180*86400000).toISOString();
+  try{
+    const [users,online,visitsToday,visitsMonth,loginsMonth,commentsMonth]=await Promise.all([
+      countQuery(sb.from('profiles').select('*',{count:'exact',head:true})),
+      countQuery(sb.from('profiles').select('*',{count:'exact',head:true}).gte('last_seen',new Date(now.getTime()-5*60000).toISOString())),
+      countQuery(sb.from('analytics_events').select('*',{count:'exact',head:true}).eq('event_type','page_view').gte('created_at',isoToday)),
+      countQuery(sb.from('analytics_events').select('*',{count:'exact',head:true}).eq('event_type','page_view').gte('created_at',isoMonth)),
+      countQuery(sb.from('analytics_events').select('*',{count:'exact',head:true}).eq('event_type','login').gte('created_at',isoMonth)),
+      countQuery(sb.from('comments').select('*',{count:'exact',head:true}).gte('created_at',isoMonth))
+    ]);
+    let ev=[],cm=[];
+    try{
+      const r1=await sb.from('analytics_events').select('event_type,created_at,session_id').gte('created_at',iso180);
+      ev=r1.data||[];
+      const r2=await sb.from('comments').select('created_at').gte('created_at',iso180);
+      cm=r2.data||[];
+    }catch(e){}
+
+    const days=[]; for(let i=29;i>=0;i--){ const d=new Date(now); d.setDate(d.getDate()-i); days.push(dateKey(d)); }
+    const daily={visits:{},logins:{}}; days.forEach(k=>{daily.visits[k]=0;daily.logins[k]=0;});
+    const dailyComments={}; days.forEach(k=>dailyComments[k]=0);
+    const visitorsToday=new Set(), visitorsMonth=new Set();
+    ev.forEach(e=>{
+      const k=dateKey(new Date(e.created_at));
+      if(daily.visits[k]!==undefined) daily.visits[k]++;
+      if(e.event_type==='login'&&daily.logins[k]!==undefined) daily.logins[k]++;
+      const t=new Date(e.created_at).getTime();
+      if(e.session_id){
+        if(t>=new Date(isoToday).getTime()) visitorsToday.add(e.session_id);
+        if(t>=new Date(isoMonth).getTime()) visitorsMonth.add(e.session_id);
+      }
+    });
+    cm.forEach(c=>{ const k=dateKey(new Date(c.created_at)); if(dailyComments[k]!==undefined) dailyComments[k]++; });
+
+    const months=[]; for(let i=5;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth()-i,1); months.push({key:monthKey(d),label:monthLabel(d,currentLang)}); }
+    const monthly={}; months.forEach(m=>monthly[m.key]=0);
+    ev.forEach(e=>{ const k=monthKey(new Date(e.created_at)); if(monthly[k]!==undefined) monthly[k]++; });
+
+    lastStats={users,online,visitsToday,visitorsToday:visitorsToday.size,visitsMonth,visitorsMonth:visitorsMonth.size,loginsMonth,commentsMonth,daily,dailyComments,months,monthly};
+    renderStats(lastStats);
+  }catch(err){ console.warn('loadStats:',err); }
+}
+function renderStats(s){
+  const total=s.months.reduce((a,m)=>a+(s.monthly[m.key]||0),0);
+  const cards=[
+    {l:T.stats_users[currentLang],v:s.users,ic:'👥'},
+    {l:T.stats_online[currentLang],v:s.online,ic:'🟢'},
+    {l:T.stats_visits_today[currentLang],v:s.visitsToday,ic:'👁️'},
+    {l:T.stats_visitors_today[currentLang],v:s.visitorsToday,ic:'🧍'},
+    {l:T.stats_visits_month[currentLang],v:s.visitsMonth,ic:'📈'},
+    {l:T.stats_logins_month[currentLang],v:s.loginsMonth,ic:'🔑'},
+    {l:T.stats_comments_month[currentLang],v:s.commentsMonth,ic:'💬'}
+  ];
+  document.getElementById('statsCards').innerHTML=cards.map(c=>`<div class="stat-card"><div class="stat-icon">${c.ic}</div><div class="stat-num">${c.v}</div><div class="stat-label">${c.l}</div></div>`).join('');
+  chartInto('chartVisits',s.daily.visits,5);
+  chartInto('chartLogins',s.daily.logins,5);
+  chartInto('chartComments',s.dailyComments,5);
+  document.getElementById('chartMonth').innerHTML=chartBars(s.months.map(m=>s.monthly[m.key]||0),s.months.map(m=>m.label),1);
+  const hint=document.getElementById('statsHint');
+  if(hint) hint.style.display=(total===0&&s.visitsMonth===0)?'block':'none';
+}
+function chartInto(id,map,step){
+  const keys=Object.keys(map);
+  const vals=keys.map(k=>map[k]);
+  const labels=keys.map(k=>k.split('-')[2]);
+  document.getElementById(id).innerHTML=chartBars(vals,labels,step);
+}
+function chartBars(vals,labels,step){
+  const max=Math.max.apply(null,vals.concat([1]));
+  return vals.map((v,i)=>'<div class="chart-col"><div class="chart-bar" style="height:'+Math.round(v/max*100)+'%"><span class="chart-val">'+(v||'')+'</span></div><span class="chart-label">'+((i%step===0)?labels[i]:'')+'</span></div>').join('');
+}
 
 /* ======================================================
    ITEM MODALS
@@ -539,6 +733,7 @@ async function deleteItem(type,id){
   await loadAllData();
   renderAdminTabs();
   renderAdminGrid();
+  restoreSession();
 })();
 </script>
 </body>
