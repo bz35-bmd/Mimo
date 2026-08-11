@@ -3320,7 +3320,7 @@ setInterval(()=>showSocialProof(),25000);
    ====================================================== */
 const AUTH_CF = {login:'cfTurnstileLogin', register:'cfTurnstileRegister', forgot:'cfTurnstileForgot'};
 const SITE_URL = location.protocol+'//'+location.host+(location.pathname||'/');
-const TURNSTILE_SITE_KEY = "0x4AAAAAAEGDgLfygIgeZ-OB"; /* ← Collez ici votre Cloudflare Turnstile Site Key */
+const TURNSTILE_SITE_KEY = ""; /* ← Collez ici votre Cloudflare Turnstile Site Key */
 let authUser=null;
 let cfWidgets={};
 
@@ -3344,17 +3344,13 @@ function renderTurnstile(view){
   }catch(e){ console.warn('Turnstile:',e); }
 }
 function resetTurnstile(view){ if(cfWidgets[view]&&window.turnstile) window.turnstile.reset(cfWidgets[view]); }
-async function verifyTurnstile(view){
-  if(!TURNSTILE_SITE_KEY) return true;
-  const token=window.turnstile?window.turnstile.getResponse(cfWidgets[view]):'';
-  if(!token){ showToast(T.auth_captcha_err[currentLang],'error'); return false; }
-  if(!sb) return true;
-  try{
-    const {data,error}=await sb.functions.invoke('verify-turnstile',{body:{token}});
-    if(error) return true;
-    if(data&&data.success) return true;
-    showToast(T.auth_captcha_err[currentLang],'error'); return false;
-  }catch(e){ console.warn('verify-turnstile:',e); return true; }
+function cfToken(view){ return (window.turnstile&&cfWidgets[view])?window.turnstile.getResponse(cfWidgets[view])||'':''; }
+function activeAuthView(){ const v=document.querySelector('.auth-view:not(.hidden)'); return v?String(v.id).replace('authView',''):'login'; }
+async function requireTurnstile(view){
+  if(!TURNSTILE_SITE_KEY) return '';
+  const token=cfToken(view);
+  if(!token){ showToast(T.auth_captcha_err[currentLang],'error'); return null; }
+  return token;
 }
 function openAuthModal(view){
   const modal=document.getElementById('authModal');
@@ -3437,9 +3433,9 @@ async function doRegister(e){
   if(!name||!email||!p1){ showToast(T.auth_err_required[currentLang],'error'); return; }
   if(p1.length<6){ showToast(T.auth_err_password_len[currentLang],'error'); return; }
   if(p1!==p2){ showToast(T.auth_err_password[currentLang],'error'); return; }
-  if(!(await verifyTurnstile('register'))) return;
+  const token=await requireTurnstile('register'); if(token===null) return;
   try{
-    const {error}=await sb.auth.signUp({email,password:p1,options:{data:{full_name:name}}});
+    const {error}=await sb.auth.signUp({email,password:p1,options:{data:{full_name:name},...(token?{captchaToken:token}:{})}});
     if(error) throw error;
     trackEvent('register',{email});
     showToast(T.auth_ok_register[currentLang],'success');
@@ -3452,9 +3448,9 @@ async function doLogin(e){
   const f=e.target;
   const email=f.l_email.value.trim(), pwd=f.l_password.value;
   if(!email||!pwd){ showToast(T.auth_err_required[currentLang],'error'); return; }
-  if(!(await verifyTurnstile('login'))) return;
+  const token=await requireTurnstile('login'); if(token===null) return;
   try{
-    const {error}=await sb.auth.signInWithPassword({email,password:pwd});
+    const {error}=await sb.auth.signInWithPassword({email,password:pwd,options:token?{captchaToken:token}:{}});
     if(error) throw error;
     trackEvent('login',{email});
     showToast(T.auth_ok_login[currentLang],'success');
@@ -3465,9 +3461,9 @@ async function doForgot(e){
   e.preventDefault();
   const email=e.target.f_email.value.trim();
   if(!email){ showToast(T.auth_err_required[currentLang],'error'); return; }
-  if(!(await verifyTurnstile('forgot'))) return;
+  const token=await requireTurnstile('forgot'); if(token===null) return;
   try{
-    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:SITE_URL});
+    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:SITE_URL,...(token?{captchaToken:token}:{})});
     if(error) throw error;
     showToast(T.auth_ok_forgot[currentLang],'success');
     showAuthView('login');
@@ -3488,8 +3484,9 @@ async function doReset(e){
 }
 async function googleLogin(){
   if(!sb) return;
+  const token=await requireTurnstile(activeAuthView()); if(token===null) return;
   try{
-    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:SITE_URL}});
+    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:SITE_URL,...(token?{captchaToken:token}:{})}});
     if(error) throw error;
   }catch(err){ showToast(T.toast_error[currentLang]+': '+err.message,'error'); }
 }
