@@ -1615,14 +1615,28 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
 }
 .um-name { font-weight:600; font-size:.85rem; max-width:150px; overflow:hidden; text-overflow:ellipsis; }
 .um-email { font-size:.72rem; color:var(--text-muted); max-width:150px; overflow:hidden; text-overflow:ellipsis; }
+.um-role {
+  margin-left:auto; flex:none;
+  font-size:.6rem; font-weight:700; letter-spacing:.3px; text-transform:uppercase;
+  padding:3px 8px; border-radius:999px;
+  background:rgba(255,255,255,.06); color:var(--text-muted); border:1px solid var(--border);
+}
+.um-role[data-role="admin"] { background:rgba(108,92,231,.16); color:var(--accent-2,var(--accent)); border-color:rgba(108,92,231,.35); }
+.um-role[data-role="moderator"] { background:rgba(250,163,61,.14); color:#f6a64a; border-color:rgba(250,163,61,.35); }
 .um-btn {
   display:flex; align-items:center; gap:8px; width:100%;
   margin-top:8px; padding:9px 10px; border-radius:10px;
-  background:transparent; border:none; color:var(--danger,#FF6B6B);
+  background:transparent; border:none; color:var(--text);
   font-size:.8rem; font-weight:600; font-family:inherit; cursor:pointer;
+  text-decoration:none;
 }
-.um-btn svg { width:16px; height:16px; }
-.um-btn:hover { background:rgba(255,107,107,.1); }
+.um-btn svg { width:16px; height:16px; color:var(--text-muted); }
+.um-btn.um-admin { color:var(--accent-2,var(--accent)); }
+.um-btn.um-admin svg { color:var(--accent-2,var(--accent)); }
+.um-btn.um-admin:hover { background:rgba(108,92,231,.12); }
+.um-btn.um-logout { color:var(--danger,#FF6B6B); }
+.um-btn.um-logout svg { color:var(--danger,#FF6B6B); }
+.um-btn.um-logout:hover { background:rgba(255,107,107,.1); }
 
 .auth-overlay {
   position:fixed; inset:0; z-index:400; display:flex; align-items:center; justify-content:center;
@@ -1681,7 +1695,30 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
   transition:border-color .2s, box-shadow .2s;
 }
 .auth-google:hover { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
-.cf-turnstile-wrap { display:flex; justify-content:center; margin:10px 0 2px; min-height:65px; }
+.cf-box {
+  position:relative; margin:14px 0 4px; padding:10px 10px 8px;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(108,92,231,.07), rgba(108,92,231,.015));
+  border:1px solid var(--border);
+}
+.cf-box::before {
+  content:''; position:absolute; inset:0; border-radius:14px; padding:1px; pointer-events:none;
+  background:linear-gradient(120deg, rgba(108,92,231,.55), rgba(52,199,123,.4), rgba(108,92,231,.55));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; opacity:.45;
+}
+.cf-box-label {
+  display:flex; align-items:center; gap:6px;
+  font-size:.66rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
+  color:var(--text-muted); padding:0 2px 8px;
+}
+.cf-box-label svg { width:14px; height:14px; flex:none; color:var(--accent-2,var(--accent)); }
+.cf-box-label .cf-dot {
+  width:6px; height:6px; border-radius:50%; margin-left:auto;
+  background:var(--accent-2,var(--accent)); animation:cfPulse 2.2s ease-in-out infinite;
+}
+@keyframes cfPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.cf-turnstile-wrap { display:flex; justify-content:center; min-height:65px; }
 
 @media(max-width:640px){
   .auth-btn { padding:8px 12px; }
@@ -1914,8 +1951,13 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
             <div class="um-name" id="umName">—</div>
             <div class="um-email" id="umEmail">—</div>
           </div>
+          <span class="um-role" id="umRole"></span>
         </div>
-        <button class="um-btn" onclick="logout()" type="button">
+        <a class="um-btn um-admin" id="umAdmin" href="admin.html" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span data-i18n="nav_admin">لوحة الإدارة</span>
+        </a>
+        <button class="um-btn um-logout" onclick="logout()" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           <span data-i18n="auth_logout">تسجيل الخروج</span>
         </button>
@@ -2034,7 +2076,14 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
         <input type="email" name="l_email" required autocomplete="email">
         <label data-i18n="auth_password">كلمة المرور</label>
         <input type="password" name="l_password" required autocomplete="current-password">
-        <div class="cf-turnstile-wrap" id="cfTurnstileLogin"></div>
+        <div class="cf-box">
+          <div class="cf-box-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
+            <span class="cf-dot"></span>
+          </div>
+          <div class="cf-turnstile-wrap" id="cfTurnstileLogin"></div>
+        </div>
         <button type="submit" class="submit-btn" data-i18n="auth_tab_login">تسجيل الدخول</button>
       </form>
       <div class="auth-switch"><span data-i18n="auth_no_account">ليس لديك حساب؟</span> <a href="#" onclick="event.preventDefault();showAuthView('register')" data-i18n="auth_register">إنشاء حساب</a></div>
@@ -2062,7 +2111,14 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
         <input type="password" name="r_password" required autocomplete="new-password">
         <label data-i18n="auth_confirm">تأكيد كلمة المرور</label>
         <input type="password" name="r_confirm" required autocomplete="new-password">
-        <div class="cf-turnstile-wrap" id="cfTurnstileRegister"></div>
+        <div class="cf-box">
+          <div class="cf-box-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
+            <span class="cf-dot"></span>
+          </div>
+          <div class="cf-turnstile-wrap" id="cfTurnstileRegister"></div>
+        </div>
         <button type="submit" class="submit-btn" data-i18n="auth_tab_register">إنشاء حساب</button>
       </form>
       <div class="auth-switch"><span data-i18n="auth_have_account">لديك حساب؟</span> <a href="#" onclick="event.preventDefault();showAuthView('login')" data-i18n="auth_login">تسجيل الدخول</a></div>
@@ -2081,7 +2137,14 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
       <form class="auth-form" onsubmit="doForgot(event)">
         <label data-i18n="auth_email">البريد الإلكتروني</label>
         <input type="email" name="f_email" required autocomplete="email">
-        <div class="cf-turnstile-wrap" id="cfTurnstileForgot"></div>
+        <div class="cf-box">
+          <div class="cf-box-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
+            <span class="cf-dot"></span>
+          </div>
+          <div class="cf-turnstile-wrap" id="cfTurnstileForgot"></div>
+        </div>
         <button type="submit" class="submit-btn" data-i18n="auth_forgot">نسيت كلمة المرور؟</button>
       </form>
       <a href="#" class="auth-back" onclick="event.preventDefault();showAuthView('login')" data-i18n="auth_back_to_login">العودة لتسجيل الدخول</a>
@@ -2475,6 +2538,11 @@ const T = {
   auth_no_account:{ar:'ليس لديك حساب؟',fr:'Pas encore de compte ?',en:'No account yet?'},
   auth_have_account:{ar:'لديك حساب؟',fr:'Déjà un compte ?',en:'Already have an account?'},
   auth_captcha_err:{ar:'يرجى إكمال التحقق',fr:'Veuillez compléter le captcha',en:'Please complete the captcha'},
+  auth_captcha_label:{ar:'التحقق من الأمان',fr:'Vérification de sécurité',en:'Security check'},
+  role_admin:{ar:'مشرف',fr:'Admin',en:'Admin'},
+  role_moderator:{ar:'منسقة',fr:'Modérateur',en:'Moderator'},
+  role_member:{ar:'عضو',fr:'Membre',en:'Member'},
+  nav_admin:{ar:'لوحة الإدارة',fr:'Panneau admin',en:'Admin'},
   auth_err_required:{ar:'يرجى ملء جميع الحقول',fr:'Veuillez remplir tous les champs',en:'Please fill in all fields'},
   auth_err_password:{ar:'كلمتا المرور غير متطابقتين',fr:'Les mots de passe ne correspondent pas',en:'Passwords do not match'},
   auth_err_password_len:{ar:'كلمة المرور يجب أن تكون 6 أحرف على الأقل',fr:'Le mot de passe doit faire au moins 6 caractères',en:'Password must be at least 6 characters'},
@@ -2806,6 +2874,7 @@ function applyLanguage(lang){
     el.placeholder=e[lang];
   });
   html.setAttribute('lang',lang); html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
+  if(authUser) setAuthUI(authUser);
   if(currentPage==='home') App.renderHome();
   if(currentPage==='store'&&currentBusiness) App.renderStore(currentBusiness);
 }
@@ -3320,7 +3389,7 @@ setInterval(()=>showSocialProof(),25000);
    ====================================================== */
 const AUTH_CF = {login:'cfTurnstileLogin', register:'cfTurnstileRegister', forgot:'cfTurnstileForgot'};
 const SITE_URL = location.protocol+'//'+location.host+(location.pathname||'/');
-const TURNSTILE_SITE_KEY = "0x4AAAAAAEGDgLfygIgeZ-OB"; /* ← Collez ici votre Cloudflare Turnstile Site Key */
+const TURNSTILE_SITE_KEY = ""; /* ← Collez ici votre Cloudflare Turnstile Site Key */
 let authUser=null;
 let cfWidgets={};
 
@@ -3393,16 +3462,35 @@ function setAuthUI(user){
     dd.querySelector('.um-name').textContent=user.full_name||user.email||'';
     dd.querySelector('.um-email').textContent=user.email||'';
   }
+  const roleBadge=dd&&dd.querySelector('.um-role');
+  if(roleBadge){
+    if(user){
+      const r=user.role||'member';
+      roleBadge.dataset.role=r;
+      roleBadge.textContent=T['role_'+r]?T['role_'+r][currentLang]:r;
+      roleBadge.style.display='';
+    }else{
+      roleBadge.dataset.role='';
+      roleBadge.textContent='';
+      roleBadge.style.display='none';
+    }
+  }
+  const adminLink=dd&&dd.querySelector('.um-admin');
+  if(adminLink) adminLink.style.display=(user&&user.role==='admin')?'':'none';
   if(currentPage==='store'&&currentBusiness) renderCommentForm(currentBusiness);
 }
 async function loadProfile(u){
   let full_name=(u.user_metadata&&u.user_metadata.full_name)||'';
+  let role='member';
   try{
-    const {data}=await sb.from('profiles').select('full_name').eq('id',u.id).maybeSingle();
-    if(data&&data.full_name) full_name=data.full_name;
+    const {data}=await sb.from('profiles').select('full_name,role').eq('id',u.id).maybeSingle();
+    if(data){
+      if(data.full_name) full_name=data.full_name;
+      if(data.role) role=data.role;
+    }
     await touchLastSeen(u.id);
   }catch(e){}
-  setAuthUI({id:u.id,email:u.email,full_name:full_name||''});
+  setAuthUI({id:u.id,email:u.email,full_name:full_name||'',role});
 }
 async function touchLastSeen(uid){
   if(!sb) return;

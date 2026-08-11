@@ -219,6 +219,42 @@ html[data-theme="light"] .admin-topbar .logo-icon { background:#fff; border-colo
 }
 .lang-select:focus { outline:none; border-color:var(--accent); }
 
+/* USERS */
+.user-row {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:12px 0; border-bottom:1px solid var(--border); flex-wrap:wrap;
+}
+.user-row:last-child { border-bottom:none; }
+.user-info { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+.user-avatar {
+  width:38px; height:38px; border-radius:50%; flex:none;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff; font-weight:700; font-size:.9rem;
+}
+.user-name { font-size:.9rem; font-weight:600; }
+.user-mail { font-size:.76rem; color:var(--text-muted); word-break:break-all; }
+.role-select {
+  appearance:none; -webkit-appearance:none;
+  padding:8px 28px 8px 12px; border-radius:var(--r-full);
+  border:1px solid var(--border); background:var(--surface);
+  color:var(--text); font-size:.78rem; font-weight:600;
+  font-family:inherit; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B8A94' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  transition:border-color .2s;
+}
+.role-select:focus { outline:none; border-color:var(--accent); }
+.role-select:disabled { opacity:.55; cursor:not-allowed; }
+
+/* ACCESS DENIED */
+.denied-box { text-align:center; padding:10px 0; }
+.denied-icon { font-size:2.4rem; margin-bottom:10px; }
+.denied-box h2 { font-size:1.4rem; margin-bottom:8px; }
+.denied-box p { color:var(--text-secondary); }
+.denied-box .denied-sub { color:var(--text-muted); font-size:.82rem; margin-top:6px; }
+
 /* RESPONSIVE */
 @media(max-width:768px){
   .admin-grid { grid-template-columns:1fr; }
@@ -335,6 +371,13 @@ html[data-theme="light"] .admin-topbar .logo-icon { background:#fff; border-colo
       <p class="stats-hint" id="statsHint">(تظهر الأرقام بعد جمع البيانات)</p>
     </div>
     <div class="admin-biz-tabs" id="adminBizTabs"></div>
+    <div class="stats-wrap" id="usersSection">
+      <div class="stats-head">
+        <h2 id="usersTitle">المستخدمون</h2>
+        <button class="stats-refresh" onclick="loadUsers()" title="↻" aria-label="Refresh">↻</button>
+      </div>
+      <div id="usersList"></div>
+    </div>
     <div class="admin-grid" id="adminGrid"></div>
   </div>
 </div>
@@ -417,7 +460,16 @@ const T = {
   stats_chart_logins:{ar:'عمليات الدخول — آخر 30 يومًا',fr:'Connexions — 30 derniers jours',en:'Logins — last 30 days'},
   stats_chart_comments:{ar:'التعليقات — آخر 30 يومًا',fr:'Commentaires — 30 derniers jours',en:'Comments — last 30 days'},
   stats_last6m:{ar:'الزيارات — آخر 6 أشهر',fr:'Visites — 6 derniers mois',en:'Visits — last 6 months'},
-  stats_empty_hint:{ar:'(تظهر الأرقام بعد جمع البيانات من الموقع)',fr:'(Les chiffres apparaissent après collecte des données du site)',en:'(Figures appear once site data is collected)'}
+  stats_empty_hint:{ar:'(تظهر الأرقام بعد جمع البيانات من الموقع)',fr:'(Les chiffres apparaissent après collecte des données du site)',en:'(Figures appear once site data is collected)'},
+  admin_users:{ar:'المستخدمون',fr:'Utilisateurs',en:'Users'},
+  admin_denied_title:{ar:'غير مصرح لك',fr:'Accès refusé',en:'Access denied'},
+  admin_denied_desc:{ar:'لوحة الإدارة متاحة فقط للمسؤولين',fr:'Ce panneau est réservé aux administrateurs',en:'This panel is restricted to admins'},
+  admin_denied_login:{ar:'حسابك مسجل، لكن ليس لديك صلاحية الوصول إلى هذه الصفحة',fr:'Votre compte est connecté mais ne possède pas les droits pour cette page',en:'You are signed in but your account lacks access to this page'},
+  admin_login_error_role:{ar:'خطأ: حسابك ليس له صلاحية الإدارة',fr:'Erreur : votre compte n\'a pas le rôle admin',en:'Error: your account does not have admin access'},
+  role_admin:{ar:'مشرف',fr:'Admin',en:'Admin'},
+  role_moderator:{ar:'منسقة',fr:'Modérateur',en:'Moderator'},
+  role_member:{ar:'عضو',fr:'Membre',en:'Member'},
+  admin_change_role:{ar:'تغيير الدور',fr:'Changer le rôle',en:'Change role'}
 };
 
 /* ======================================================
@@ -467,6 +519,9 @@ function applyLanguage(lang){
   document.getElementById('chartCommentsTitle').textContent=T.stats_chart_comments[lang];
   document.getElementById('chartMonthTitle').textContent=T.stats_last6m[lang];
   document.getElementById('statsHint').textContent=T.stats_empty_hint[lang];
+  document.getElementById('usersTitle').textContent=T.admin_users[lang];
+  if(isAdmin) renderUsers();
+  if(deniedShown) showDenied();
   if(isAdmin&&lastStats) renderStats(lastStats);
   html.setAttribute('lang',lang);
   html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
@@ -530,8 +585,9 @@ function renderAdminGrid() {
 }
 
 /* ======================================================
-   AUTH
+   AUTH + GARDE ADMIN (rôle = 'admin')
    ====================================================== */
+let currentUserId=null, deniedShown=false;
 function openLoginModal(){document.getElementById('loginOverlay').classList.add('open');}
 function closeLoginModal(){document.getElementById('loginOverlay').classList.remove('open');}
 document.getElementById('loginCancel').addEventListener('click',closeLoginModal);
@@ -544,13 +600,36 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
 });
 async function logout(){if(sb)await sb.auth.signOut();}
 
+async function verifyAdminAccess(u){
+  try{
+    const {data}=await sb.from('profiles').select('role').eq('id',u.id).maybeSingle();
+    return data&&data.role==='admin';
+  }catch(e){ return false; }
+}
+function showDenied(){
+  deniedShown=true;
+  document.getElementById('adminLoginPrompt').innerHTML=`
+    <div class="denied-box">
+      <div class="denied-icon">🔒</div>
+      <h2>${T.admin_denied_title[currentLang]}</h2>
+      <p>${T.admin_denied_desc[currentLang]}</p>
+      <p class="denied-sub">${T.admin_denied_login[currentLang]}</p>
+    </div>`;
+  document.getElementById('adminContent').classList.add('hidden');
+}
 function restoreSession(){
   if(!sb) return;
-  sb.auth.onAuthStateChange((event,session)=>{
-    if(session&&session.user&&(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED')){
-      isAdmin=true; showAdminContent();
+  sb.auth.onAuthStateChange(async (event,session)=>{
+    if(event==='SIGNED_OUT'){
+      isAdmin=false; deniedShown=false; currentUserId=null;
+      hideAdminContent(); return;
     }
-    if(event==='SIGNED_OUT'){ isAdmin=false; hideAdminContent(); }
+    if(session&&session.user&&(event==='INITIAL_SESSION'||event==='SIGNED_IN')){
+      currentUserId=session.user.id;
+      const ok=await verifyAdminAccess(session.user);
+      if(ok){ deniedShown=false; isAdmin=true; showAdminContent(); }
+      else if(!deniedShown){ isAdmin=false; showDenied(); }
+    }
   });
 }
 
@@ -558,7 +637,7 @@ function showAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
   lp.innerHTML=`<button class="product-btn" onclick="logout()">${T.admin_logout[currentLang]}</button>`;
   ct.classList.remove('hidden');
-  renderAdminTabs(); renderAdminGrid(); loadStats();
+  renderAdminTabs(); renderAdminGrid(); loadStats(); loadUsers();
 }
 function hideAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
@@ -566,6 +645,57 @@ function hideAdminContent(){
   ct.classList.add('hidden');
 }
 document.getElementById('adminLoginBtn').addEventListener('click',openLoginModal);
+
+/* ======================================================
+   GESTION DES UTILISATEURS (rôles)
+   ====================================================== */
+let usersCache=[];
+async function loadUsers(){
+  if(!sb) return;
+  try{
+    const {data,error}=await sb.from('profiles').select('id,full_name,email,role,created_at').order('created_at',{ascending:false});
+    if(error){ console.error('loadUsers:',error.message); return; }
+    usersCache=data||[];
+    renderUsers();
+  }catch(e){ console.error('loadUsers:',e); }
+}
+function roleLabel(r,lang){ return (T['role_'+r]&&T['role_'+r][lang])?T['role_'+r][lang]:r; }
+function renderUsers(){
+  const list=document.getElementById('usersList');
+  if(!list) return;
+  list.innerHTML=usersCache.map(u=>{
+    const self=currentUserId&&u.id===currentUserId;
+    return `<div class="user-row">
+      <div class="user-info">
+        <div class="user-avatar">${((u.full_name||u.email||'م').trim()[0]||'؟').toUpperCase()}</div>
+        <div style="min-width:0">
+          <div class="user-name">${u.full_name||'—'}</div>
+          <div class="user-mail">${u.email||'—'}</div>
+        </div>
+      </div>
+      <select class="role-select" data-uid="${u.id}" ${self?'disabled':''} aria-label="${T.admin_change_role[currentLang]}">
+        <option value="admin" ${u.role==='admin'?'selected':''}>${roleLabel('admin',currentLang)}</option>
+        <option value="moderator" ${u.role==='moderator'?'selected':''}>${roleLabel('moderator',currentLang)}</option>
+        <option value="member" ${u.role==='member'?'selected':''}>${roleLabel('member',currentLang)}</option>
+      </select>
+    </div>`;
+  }).join('')||`<p style="color:var(--text-muted);font-size:.85rem;padding:12px 0;">—</p>`;
+  list.querySelectorAll('.role-select').forEach(sel=>{
+    sel.addEventListener('change',()=>changeUserRole(sel));
+  });
+}
+async function changeUserRole(sel){
+  const uid=sel.dataset.uid, role=sel.value;
+  try{
+    const {error}=await sb.rpc('admin_update_role',{p_user_id:uid,p_role:role});
+    if(error) throw error;
+    const u=usersCache.find(x=>x.id===uid); if(u) u.role=role;
+    renderUsers();
+  }catch(err){
+    alert('خطأ: '+err.message);
+    loadUsers();
+  }
+}
 
 /* ======================================================
    STATISTIQUES — visiteurs, connexions, commentaires
