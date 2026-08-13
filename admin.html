@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة الإدارة — ميمو منصتي</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23141419'/%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M25 84 C 25 58, 29 40, 34 20' stroke='%23A29BFE' stroke-width='8'/%3E%3Cpath d='M66 20 C 71 40, 75 58, 75 84' stroke='%236C5CE7' stroke-width='8'/%3E%3Cpath d='M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20' stroke='%23F9CA24' stroke-width='8'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="admin-topbar">
+  <div class="admin-topbar-left">
+    <a href="index.html" class="logo-icon" style="cursor:pointer" aria-label="Mimo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="aR1" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6C5CE7"/><stop offset="100%" stop-color="#A29BFE"/>
+          </linearGradient>
+          <linearGradient id="aR2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/>
+          </linearGradient>
+          <linearGradient id="aR3" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round">
+          <path d="M25 84 C 25 58, 29 40, 34 20" stroke="url(#aR1)" stroke-width="8"/>
+          <path d="M66 20 C 71 40, 75 58, 75 84" stroke="url(#aR3)" stroke-width="8"/>
+          <path d="M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20" stroke="url(#aR2)" stroke-width="8"/>
+        </g>
+      </svg>
+    </a>
+    <h1 id="topbarTitle">لوحة الإدارة</h1>
+  </div>
+  <div class="admin-topbar-right">
+    <div class="lang-switch">
+      <select class="lang-select" id="langSwitch">
+        <option value="ar" selected>AR</option>
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+    <button class="theme-btn" id="themeToggle">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <a href="index.html">العودة للمنصة</a>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="admin-page">
+  <div class="admin-header">
+    <h1 id="adminTitle">لوحة الإدارة</h1>
+    <p id="adminSub">أضيفي وعدّلي واحذفي المنتجات لكل مشروع</p>
+  </div>
+  <div id="adminLoginPrompt" style="text-align:center;margin-bottom:30px;">
+    <button class="product-btn" id="adminLoginBtn">دخول الإدارة</button>
+  </div>
+  <div id="adminContent" class="hidden">
+    <div class="stats-wrap" id="statsSection">
+      <div class="stats-head">
+        <h2 id="statsTitle">الإحصائيات</h2>
+        <button class="stats-refresh" onclick="loadStats()" title="↻" aria-label="Refresh">↻</button>
+      </div>
+      <div class="stats-cards" id="statsCards"></div>
+      <div class="stats-charts">
+        <div class="chart-card"><h3 id="chartVisitsTitle">الزيارات</h3><div class="chart-bars" id="chartVisits"></div></div>
+        <div class="chart-card"><h3 id="chartLoginsTitle">عمليات الدخول</h3><div class="chart-bars" id="chartLogins"></div></div>
+        <div class="chart-card"><h3 id="chartCommentsTitle">التعليقات</h3><div class="chart-bars" id="chartComments"></div></div>
+      </div>
+      <div class="chart-card"><h3 id="chartMonthTitle">الزيارات — آخر 6 أشهر</h3><div class="chart-bars" id="chartMonth"></div></div>
+      <p class="stats-hint" id="statsHint">(تظهر الأرقام بعد جمع البيانات)</p>
+    </div>
+    <div class="admin-biz-tabs" id="adminBizTabs"></div>
+    <div class="stats-wrap" id="usersSection">
+      <div class="stats-head">
+        <h2 id="usersTitle">المستخدمون</h2>
+        <button class="stats-refresh" onclick="loadUsers()" title="↻" aria-label="Refresh">↻</button>
+      </div>
+      <div id="usersList"></div>
+    </div>
+    <div class="admin-grid" id="adminGrid"></div>
+  </div>
+</div>
+
+<!-- ITEM MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <h3 id="modalTitle">إضافة منتج</h3>
+    <form id="itemForm">
+      <label id="labelTitle">الاسم</label>
+      <input type="text" id="fieldTitle" required>
+      <label id="labelPrice">السعر</label>
+      <input type="text" id="fieldPrice" placeholder="مثال: 1,200 دج">
+      <label id="labelTag">الوسم</label>
+      <input type="text" id="fieldTag" placeholder="مثال: للمبتدئات">
+      <label id="labelDesc">الوصف المختصر</label>
+      <textarea id="fieldDesc"></textarea>
+      <label id="modalImageLabel">الصورة (اختياري)</label>
+      <input type="file" id="fieldImage" accept="image/*">
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="modalCancel">إلغاء</button>
+        <button type="submit" class="modal-save" id="modalSave">حفظ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginOverlay">
+  <div class="modal-box">
+    <h3 id="loginModalTitle">دخول الإدارة</h3>
+    <form id="loginForm">
+      <label id="loginEmailLabel">البريد الإلكتروني</label>
+      <input type="email" id="loginEmail" required>
+      <label id="loginPasswordLabel">كلمة المرور</label>
+      <input type="password" id="loginPassword" required>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="loginCancel">إلغاء</button>
+        <button type="submit" class="modal-save" id="loginSave">دخول</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
