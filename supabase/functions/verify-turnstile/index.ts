@@ -8,7 +8,7 @@
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 Deno.serve(async (req: Request) => {
-  const secret = Deno.env.get('TURNSTILE_SECRET_KEY') || '';
+  const secret = Deno.env.get('0x4AAAAAAEPFGwVtbE6EHf9d5QFiQwVrAsg') || '';
   const headers = { 'Content-Type': 'application/json' };
 
   try {
