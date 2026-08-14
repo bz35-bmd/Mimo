@@ -425,7 +425,7 @@ const LOGOS={
     inner:'<defs><linearGradient id="loG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/></linearGradient><linearGradient id="loG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6C5CE7"/><stop offset="100%" stop-color="#A29BFE"/></linearGradient></defs><circle cx="50" cy="50" r="25" fill="none" stroke="url(#loG1)" stroke-width="8"/><ellipse cx="50" cy="50" rx="41" ry="15" fill="none" stroke="url(#loG2)" stroke-width="3.5" transform="rotate(-22 50 50)" opacity=".85"/><circle cx="84" cy="34" r="5" fill="#F9CA24"/><circle cx="24" cy="72" r="4" fill="#A29BFE"/><circle cx="50" cy="50" r="6" fill="#6C5CE7"/>'
   },
   crescent:{
-    inner:'<defs><linearGradient id="lcG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/></linearGradient><linearGradient id="lcG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/></linearGradient></defs><path d="M60 14 A 32 32 0 1 0 60 86 A 26 26 0 1 1 60 14 Z" fill="url(#lcG1)"/><path d="M69 22 L71.8 29.2 L79 32 L71.8 34.8 L69 42 L66.2 34.8 L59 32 L66.2 29.2 Z" fill="url(#lcG2)"/>'
+    inner:'<defs><linearGradient id="lcG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/></linearGradient><linearGradient id="lcG2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/></linearGradient></defs><g transform="scale(0.1953125)"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.312 258.312 0 0 0 283.211 0c-141.309 0-256 114.511-256 256s114.691 256 256 256z" fill="url(#lcG1)"/></g><path d="M65 26 L66.76 32.24 L73 34 L66.76 35.76 L65 42 L63.24 35.76 L57 34 L63.24 32.24 Z" fill="url(#lcG2)"/>'
   }
 };
 
@@ -472,6 +472,7 @@ function applyLogo(logo){
   currentLogo=logo;
   const svg='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">'+LOGOS[logo].inner+'</svg>';
   document.querySelectorAll('.app-logo').forEach(el=>{ el.innerHTML=svg; });
+  document.querySelectorAll('.orbit-center').forEach(el=>{ el.innerHTML=svg; });
   document.querySelectorAll('[data-logo-preview]').forEach(el=>{
     const v=LOGOS[el.getAttribute('data-logo-preview')];
     if(v) el.innerHTML='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">'+v.inner+'</svg>';
@@ -1038,7 +1039,7 @@ setInterval(()=>showSocialProof(),25000);
    ====================================================== */
 const AUTH_CF = {login:'cfTurnstileLogin', register:'cfTurnstileRegister', forgot:'cfTurnstileForgot'};
 const SITE_URL = location.protocol+'//'+location.host+(location.pathname||'/');
-const TURNSTILE_SITE_KEY = "0x4AAAAAAEPFG1ffhmrj9MDc"; /* ← Collez ici votre Cloudflare Turnstile  */
+const TURNSTILE_SITE_KEY = ""; /* ← Collez ici votre Cloudflare Turnstile Site Key */
 let authUser=null;
 let cfWidgets={};
 
