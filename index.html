@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=cfTurnstileInit" async defer></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="home" data-chat="on" data-sp="on" data-exit="on">
 
 <!-- Animated background orbs -->
 <div class="bg-orbs">
@@ -38,375 +38,18 @@
 <!-- Bokeh background -->
 <div class="bg-bokeh" id="bgBokeh" aria-hidden="true"></div>
 
-<!-- Floating WhatsApp -->
-<a href="https://wa.me/213558253614" target="_blank" class="float-wa" id="floatWa" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
-<!-- SOCIAL PROOF TOAST -->
-<div class="social-proof" id="socialProof">
-  <div class="sp-avatar" id="spAvatar">🛒</div>
-  <div class="sp-info">
-    <div class="sp-name" id="spName">—</div>
-    <div class="sp-action" id="spAction">—</div>
-    <div class="sp-time" id="spTime">—</div>
-  </div>
-  <button class="sp-close" onclick="hideSocialProof()">✕</button>
-</div>
-
-<!-- QUICK VIEW MODAL -->
-<div class="qv-overlay" id="qvOverlay" onclick="if(event.target===this)closeQuickView()">
-  <div class="qv-box" style="position:relative;">
-    <button class="qv-close" onclick="closeQuickView()">✕</button>
-    <div class="qv-img" id="qvImg"><div class="qv-placeholder">📦</div></div>
-    <div class="qv-details">
-      <div class="qv-badge badge-hot" id="qvBadge" style="display:none;"></div>
-      <h3 id="qvTitle">—</h3>
-      <div class="qv-price" id="qvPrice">—</div>
-      <div class="qv-desc" id="qvDesc">—</div>
-      <div class="qv-stock" id="qvStock"><div class="stock-dot in-stock"></div> <span>متوفر</span></div>
-      <div class="qv-actions">
-        <a class="qv-wa-btn" id="qvWaBtn" href="#" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span data-i18n="order_now">اطلب الآن</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- EXIT INTENT POPUP -->
-<div class="exit-popup" id="exitPopup">
-  <div class="exit-box">
-    <button class="exit-close-x" onclick="closeExitPopup()">✕</button>
-    <div class="exit-emoji">🎁</div>
-      <h3 data-i18n="exit_title">انتظري! لديكِ عرض خاص</h3>
-      <p data-i18n="exit_desc">احصلِ على خصم 10% على طلبكِ الأول! استخدمي كود <strong>WELCOME10</strong></p>
-    <div class="exit-offer">
-      <div class="offer-text" data-i18n="exit_offer">✨ كود WELCOME10 — صالح لمدة 24 ساعة</div>
-    </div>
-    <div class="exit-actions">
-      <a class="exit-wa" href="https://wa.me/213558253614?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B!%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85%20%D9%83%D9%88%D8%AF%20WELCOME10%20%D9%84%D9%84%D8%AE%D8%B5%D9%85" target="_blank" data-i18n="exit_btn">استخدم العرض الآن</a>
-      <button class="exit-close" onclick="closeExitPopup()" data-i18n="exit_later">لاحقًا</button>
-    </div>
-  </div>
-</div>
-
-<!-- STICKY MOBILE CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <div class="cta-info">
-    <div class="cta-title" id="ctaTitle">ميمو مرسيري</div>
-    <div class="cta-sub" id="ctaSub">اطلب الآن عبر واتساب</div>
-  </div>
-  <a class="cta-wa" id="ctaWa" href="https://wa.me/213558253614" target="_blank">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp
-  </a>
-</div>
-
-<!-- TRUST BADGES (injected by JS) -->
-
-<!-- TOPBAR -->
-<header class="topbar">
-  <div class="topbar-logo" style="cursor:pointer" onclick="location.reload()">
-    <div class="logo-icon app-logo" aria-hidden="true">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="logoR1" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#6C5CE7"/><stop offset="100%" stop-color="#A29BFE"/>
-          </linearGradient>
-          <linearGradient id="logoR2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/>
-          </linearGradient>
-          <linearGradient id="logoR3" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/>
-          </linearGradient>
-        </defs>
-        <g fill="none" stroke-linecap="round">
-          <path d="M25 84 C 25 58, 29 40, 34 20" stroke="url(#logoR1)" stroke-width="8"/>
-          <path d="M66 20 C 71 40, 75 58, 75 84" stroke="url(#logoR3)" stroke-width="8"/>
-          <path d="M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20" stroke="url(#logoR2)" stroke-width="8"/>
-        </g>
-      </svg>
-    </div>
-    <span id="logoText" data-i18n="logo_text">ميمو منصتي</span>
-    <div class="dz-flag" title="الجزائر — Algérie">
-      <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600"><path fill="#fff" d="M0 0h900v600H0z"/><path fill="#063" d="M0 0h450v600H0z"/><path fill="#d21034" d="M579.903811 225a150 150 0 1 0 0 150 120 120 0 1 1 0-150M585.676275 300 450 255.916106 533.852549 371.329239v-142.658277L450 344.083894z"/></svg>
-    </div>
-  </div>
-  <nav class="topbar-nav" id="topbarNav">
-    <button class="active" data-page="home" data-i18n="tab_home">الرئيسية</button>
-    <button data-page="mercerie" data-i18n="tab_mercerie">ميمو مرسيري</button>
-    <button data-page="rental" data-i18n="tab_rental">ميمو أفراح</button>
-    <button data-page="patisserie" data-i18n="tab_patisserie">ميمو كيك</button>
-  </nav>
-  <div class="topbar-actions">
-    <div class="search-wrapper">
-      <div class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-      <input type="text" class="search-input" id="searchInput" placeholder="بحث..." data-i18n-placeholder="search_placeholder">
-      <div class="search-results" id="searchResults"></div>
-    </div>
-    <div class="lang-switch">
-      <select class="lang-select" id="langSwitch">
-        <option value="ar" selected>AR</option>
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-      </select>
-    </div>
-    <button class="theme-btn" id="themeToggle">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-    </button>
-    <button class="theme-btn" id="settingsBtn" aria-label="Réglages">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.01a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-    </button>
-    <div class="user-area" id="userArea">
-      <button class="auth-btn" id="authBtn" type="button">
-        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
-        <span data-i18n="auth_login">تسجيل الدخول</span>
-      </button>
-      <div class="user-menu" id="userMenu">
-        <div class="um-head">
-          <div class="um-avatar" id="umAvatar">م</div>
-          <div class="um-meta">
-            <div class="um-name" id="umName">—</div>
-            <div class="um-email" id="umEmail">—</div>
-            <span class="um-role" id="umRole"></span>
-          </div>
-        </div>
-        <a class="um-btn um-admin" id="umAdmin" href="admin.html" style="display:none">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <span data-i18n="nav_admin">لوحة الإدارة</span>
-        </a>
-        <button class="um-btn um-logout" onclick="logout()" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          <span data-i18n="auth_logout">تسجيل الخروج</span>
-        </button>
-      </div>
-    </div>
-    <button class="burger" id="burgerBtn">☰</button>
-  </div>
-</header>
-
-<!-- SETTINGS PANEL -->
-<div class="settings-panel" id="settingsPanel" aria-hidden="true">
-  <div class="settings-head">
-    <h4 data-i18n="settings_title">التخصيص</h4>
-    <button class="settings-close" id="settingsClose">✕</button>
-  </div>
-  <div class="settings-body">
-    <div class="settings-group">
-      <h5 data-i18n="settings_theme">المظهر</h5>
-      <div class="settings-options" id="themeOptions">
-        <button class="settings-opt" data-theme="dark" title="Dark">
-          <span class="so-preview th-swatch" style="background:#0A0A0F"><span class="dot" style="background:#6C5CE7"></span></span>
-          <span class="so-label" data-i18n="theme_dark">داكن</span>
-        </button>
-        <button class="settings-opt" data-theme="light" title="Light">
-          <span class="so-preview th-swatch" style="background:#F5F5F7"><span class="dot" style="background:#6C5CE7"></span></span>
-          <span class="so-label" data-i18n="theme_light">فاتح</span>
-        </button>
-        <button class="settings-opt" data-theme="midnight" title="Midnight">
-          <span class="so-preview th-swatch" style="background:#070B14"><span class="dot" style="background:#38BDF8"></span></span>
-          <span class="so-label" data-i18n="theme_midnight">منتصف الليل</span>
-        </button>
-        <button class="settings-opt" data-theme="emerald" title="Emerald">
-          <span class="so-preview th-swatch" style="background:#05100C"><span class="dot" style="background:#10B981"></span></span>
-          <span class="so-label" data-i18n="theme_emerald">زمردي</span>
-        </button>
-        <button class="settings-opt" data-theme="rose" title="Rose">
-          <span class="so-preview th-swatch" style="background:#FDF2F6"><span class="dot" style="background:#E84393"></span></span>
-          <span class="so-label" data-i18n="theme_rose">وردي</span>
-        </button>
-      </div>
-    </div>
-    <div class="settings-group">
-      <h5 data-i18n="settings_bg">الخلفية</h5>
-      <div class="settings-options" id="bgOptions">
-        <button class="settings-opt" data-bg="threads">
-          <span class="so-preview so-threads" aria-hidden="true">
-            <svg viewBox="0 0 44 30"><path d="M2 22 C 12 8, 22 26, 42 10" fill="none" stroke="#F9CA24" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3 4"/></svg>
-          </span>
-          <span class="so-label" data-i18n="settings_bg_threads">الخيط الذهبي</span>
-        </button>
-        <button class="settings-opt" data-bg="confetti">
-          <span class="so-preview so-confetti" aria-hidden="true">
-            <span class="pc p1"></span><span class="pc p2"></span><span class="pc p3"></span><span class="pc p4"></span>
-          </span>
-          <span class="so-label" data-i18n="settings_bg_confetti">القصاصات</span>
-        </button>
-        <button class="settings-opt" data-bg="bokeh">
-          <span class="so-preview so-bokeh" aria-hidden="true">
-            <span class="bk-p b1"></span><span class="bk-p b2"></span><span class="bk-p b3"></span>
-          </span>
-          <span class="so-label" data-i18n="settings_bg_bokeh">البوكيه</span>
-        </button>
-      </div>
-    </div>
-    <div class="settings-group">
-      <h5 data-i18n="settings_logo">الشعار</h5>
-      <div class="settings-options" id="logoOptions">
-        <button class="settings-opt" data-logo="ribbons">
-          <span class="so-preview so-logo" data-logo-preview="ribbons"></span>
-          <span class="so-label" data-i18n="settings_logo_ribbons">الأشرطة</span>
-        </button>
-        <button class="settings-opt" data-logo="orbit">
-          <span class="so-preview so-logo" data-logo-preview="orbit"></span>
-          <span class="so-label" data-i18n="settings_logo_orbit">المدار</span>
-        </button>
-        <button class="settings-opt" data-logo="crescent">
-          <span class="so-preview so-logo" data-logo-preview="crescent"></span>
-          <span class="so-label" data-i18n="settings_logo_crescent">الهلال</span>
-        </button>
-      </div>
-    </div>
-    <div class="settings-group">
-      <h5 data-i18n="settings_anim">الحركات</h5>
-      <div class="settings-options" id="animOptions">
-        <button class="settings-opt" data-anim="a" title="A · Minimal">
-          <span class="so-preview so-anim so-anim-a"><i></i><i></i><i></i></span>
-          <span class="so-label" data-i18n="settings_anim_a">Minimal</span>
-        </button>
-        <button class="settings-opt" data-anim="b" title="B · Fil d'or">
-          <span class="so-preview so-anim so-anim-b"><i></i></span>
-          <span class="so-label" data-i18n="settings_anim_b">Fil d'or</span>
-        </button>
-        <button class="settings-opt" data-anim="c" title="C · Orbite">
-          <span class="so-preview so-anim so-anim-c"><i></i></span>
-          <span class="so-label" data-i18n="settings_anim_c">Orbite</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="settings-backdrop" id="settingsBackdrop"></div>
-
-<!-- AUTH MODAL -->
-<div class="auth-overlay" id="authModal" onclick="if(event.target===this)closeAuthModal()">
-  <div class="auth-box">
-
-    <!-- LOGIN -->
-    <div class="auth-view" id="authViewlogin">
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
-      <div class="auth-tabs">
-        <button class="auth-tab active" data-view="login" onclick="showAuthView('login')" data-i18n="auth_tab_login">تسجيل الدخول</button>
-        <button class="auth-tab" data-view="register" onclick="showAuthView('register')" data-i18n="auth_tab_register">إنشاء حساب</button>
-      </div>
-      <form class="auth-form" onsubmit="doLogin(event)">
-        <label data-i18n="auth_email">البريد الإلكتروني</label>
-        <input type="email" name="l_email" required autocomplete="email">
-        <label data-i18n="auth_password">كلمة المرور</label>
-        <input type="password" name="l_password" required autocomplete="current-password">
-        <div class="cf-box">
-          <div class="cf-box-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
-            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
-            <span class="cf-dot"></span>
-          </div>
-          <div class="cf-turnstile-wrap" id="cfTurnstileLogin"></div>
-        </div>
-        <button type="submit" class="submit-btn" data-i18n="auth_tab_login">تسجيل الدخول</button>
-      </form>
-      <div class="auth-switch"><span data-i18n="auth_no_account">ليس لديك حساب؟</span> <a href="#" onclick="event.preventDefault();showAuthView('register')" data-i18n="auth_register">إنشاء حساب</a></div>
-      <a href="#" class="auth-forgot" onclick="event.preventDefault();showAuthView('forgot')" data-i18n="auth_forgot">نسيت كلمة المرور؟</a>
-      <div class="auth-divider"><span data-i18n="auth_or">أو</span></div>
-      <button type="button" class="auth-google" onclick="googleLogin()">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        <span data-i18n="auth_google">المتابعة عبر جوجل</span>
-      </button>
-    </div>
-
-    <!-- REGISTER -->
-    <div class="auth-view hidden" id="authViewregister">
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
-      <div class="auth-tabs">
-        <button class="auth-tab" data-view="login" onclick="showAuthView('login')" data-i18n="auth_tab_login">تسجيل الدخول</button>
-        <button class="auth-tab active" data-view="register" onclick="showAuthView('register')" data-i18n="auth_tab_register">إنشاء حساب</button>
-      </div>
-      <form class="auth-form" onsubmit="doRegister(event)">
-        <label data-i18n="auth_name">الاسم الكامل</label>
-        <input type="text" name="r_name" required autocomplete="name">
-        <label data-i18n="auth_email">البريد الإلكتروني</label>
-        <input type="email" name="r_email" required autocomplete="email">
-        <label data-i18n="auth_password">كلمة المرور</label>
-        <input type="password" name="r_password" required autocomplete="new-password">
-        <label data-i18n="auth_confirm">تأكيد كلمة المرور</label>
-        <input type="password" name="r_confirm" required autocomplete="new-password">
-        <div class="cf-box">
-          <div class="cf-box-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
-            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
-            <span class="cf-dot"></span>
-          </div>
-          <div class="cf-turnstile-wrap" id="cfTurnstileRegister"></div>
-        </div>
-        <button type="submit" class="submit-btn" data-i18n="auth_tab_register">إنشاء حساب</button>
-      </form>
-      <div class="auth-switch"><span data-i18n="auth_have_account">لديك حساب؟</span> <a href="#" onclick="event.preventDefault();showAuthView('login')" data-i18n="auth_login">تسجيل الدخول</a></div>
-      <div class="auth-divider"><span data-i18n="auth_or">أو</span></div>
-      <button type="button" class="auth-google" onclick="googleLogin()">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        <span data-i18n="auth_google">المتابعة عبر جوجل</span>
-      </button>
-    </div>
-
-    <!-- FORGOT -->
-    <div class="auth-view hidden" id="authViewforgot">
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
-      <div class="auth-tabs"><button class="auth-tab active" data-view="forgot" data-i18n="auth_forgot">نسيت كلمة المرور؟</button></div>
-      <p class="auth-desc" data-i18n="auth_forgot_desc">أدخلي بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين</p>
-      <form class="auth-form" onsubmit="doForgot(event)">
-        <label data-i18n="auth_email">البريد الإلكتروني</label>
-        <input type="email" name="f_email" required autocomplete="email">
-        <div class="cf-box">
-          <div class="cf-box-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
-            <span data-i18n="auth_captcha_label">التحقق من الأمان</span>
-            <span class="cf-dot"></span>
-          </div>
-          <div class="cf-turnstile-wrap" id="cfTurnstileForgot"></div>
-        </div>
-        <button type="submit" class="submit-btn" data-i18n="auth_forgot">نسيت كلمة المرور؟</button>
-      </form>
-      <a href="#" class="auth-back" onclick="event.preventDefault();showAuthView('login')" data-i18n="auth_back_to_login">العودة لتسجيل الدخول</a>
-    </div>
-
-    <!-- RESET -->
-    <div class="auth-view hidden" id="authViewreset">
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
-      <div class="auth-tabs"><button class="auth-tab active" data-view="reset" data-i18n="auth_reset_title">كلمة مرور جديدة</button></div>
-      <p class="auth-desc" data-i18n="auth_reset_desc">أدخلي كلمة مرورك الجديدة</p>
-      <form class="auth-form" onsubmit="doReset(event)">
-        <label data-i18n="auth_password">كلمة المرور</label>
-        <input type="password" name="n_password" required autocomplete="new-password">
-        <label data-i18n="auth_confirm">تأكيد كلمة المرور</label>
-        <input type="password" name="n_confirm" required autocomplete="new-password">
-        <button type="submit" class="submit-btn" data-i18n="auth_reset_title">كلمة مرور جديدة</button>
-      </form>
-    </div>
-
-  </div>
-</div>
-
-<!-- Mobile Nav -->
-<div class="overlay" id="navOverlay"></div>
-<nav class="mobile-nav" id="mobileNav">
-  <button class="close-btn" id="closeNav">✕</button>
-  <a href="#" data-page="home" class="active" data-i18n="tab_home">الرئيسية</a>
-  <a href="#" data-page="mercerie" data-i18n="tab_mercerie">ميمو مرسيري</a>
-  <a href="#" data-page="rental" data-i18n="tab_rental">ميمو أفراح</a>
-  <a href="#" data-page="patisserie" data-i18n="tab_patisserie">ميمو كيك</a>
-  <a href="#" id="authMobile" data-i18n="auth_login">تسجيل الدخول</a>
-</nav>
+<!-- Chrome partagé (topbar, nav mobile, footer, widgets) injecté par js/shell.js -->
+<div id="siteShell"></div>
 
 <!-- ============ PAGE: HOME ============ -->
-<div id="page-home" class="page">
+<main class="page">
   <div class="dash-hero">
     <div class="dash-hero-text reveal">
       <span class="hero-eyebrow" data-i18n="home_eyebrow">منصّة كل المشاريع</span>
       <h1 data-i18n="home_title">مرحبًا بكِ في<br><span>عالم ميمو</span> ✨</h1>
       <p data-i18n="home_sub">كل ما تحتاجينه من خيوط وكيك وأفراح — اطلبي الآن وسيُوصَل إليكِ</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;" class="hero-btns-container">
-        <a class="product-btn" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-full);width:auto;" href="#" onclick="event.preventDefault();App.navigate('store','mercerie')" data-i18n="home_cta1">ابدأ التصفح ←</a>
+        <a class="product-btn" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-full);width:auto;" href="mercerie.html" data-i18n="home_cta1">ابدأ التصفح ←</a>
       </div>
     </div>
     <div class="dash-hero-visual reveal">
@@ -418,18 +61,18 @@
       <span class="hero-spark s2">✦</span>
       <span class="hero-spark s3">✦</span>
       <div class="orbit">
-        <div class="orbit-dot dot-mercerie" onclick="App.navigate('store','mercerie')">
+        <a class="orbit-dot dot-mercerie" href="mercerie.html">
           <span class="dot-emoji">✂️</span>
-          <span class="dot-label">ميمو مرسيري</span>
-        </div>
-        <div class="orbit-dot dot-rental" onclick="App.navigate('store','rental')">
+          <span class="dot-label" data-i18n="tab_mercerie">ميمو مرسيري</span>
+        </a>
+        <a class="orbit-dot dot-rental" href="afrah.html">
           <span class="dot-emoji">💒</span>
-          <span class="dot-label">ميمو أفراح</span>
-        </div>
-        <div class="orbit-dot dot-patisserie" onclick="App.navigate('store','patisserie')">
+          <span class="dot-label" data-i18n="tab_rental">ميمو أفراح</span>
+        </a>
+        <a class="orbit-dot dot-patisserie" href="cake.html">
           <span class="dot-emoji">🎂</span>
-          <span class="dot-label">ميمو كيك</span>
-        </div>
+          <span class="dot-label" data-i18n="tab_patisserie">ميمو كيك</span>
+        </a>
         <div class="orbit-dot dot-fb" onclick="window.open('https://facebook.com/','_blank')">
           <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </div>
@@ -480,80 +123,15 @@
     </div>
     <div class="biz-grid" id="bizGrid"></div>
   </div>
-</div>
-
-<!-- ============ PAGE: STORE ============ -->
-<div id="page-store" class="page hidden">
-  <div id="storeContent"></div>
-</div>
-
-<!-- BACK TO TOP -->
-<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-  <div class="back-top-ring"></div>
-  <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-</div>
-
-<!-- AI ASSISTANT CHATBOT -->
-<div class="chatbot-fab" id="chatbotFab" role="button" aria-label="AI Assistant" tabindex="0">
-  <div class="pulse"></div>
-  <span class="chatbot-fab-icon">🤖</span>
-  <span class="chatbot-fab-close">✕</span>
-</div>
-<div class="chatbot-window" id="chatbotWindow">
-  <div class="chatbot-head">
-    <div class="chatbot-head-left">
-      <span class="chatbot-head-avatar">🤖</span>
-      <div>
-        <h4 data-i18n="chat_title">مساعد ميمو</h4>
-        <span data-i18n="chat_sub">متصل الآن</span>
-      </div>
-    </div>
-    <button class="chatbot-head-close" id="chatbotClose">✕</button>
-  </div>
-  <div class="chatbot-body" id="chatbotBody">
-    <div class="chatbot-typing" id="chatbotTyping">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-  <div class="chatbot-quickreplies" id="chatbotQuickReplies"></div>
-  <div class="chatbot-foot">
-    <input type="text" id="chatbotInput" data-i18n-placeholder="chat_placeholder" placeholder="اكتبي سؤالك..." autocomplete="off">
-    <button id="chatbotSend" aria-label="Send">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="site-footer" id="siteFooter">
-  <div class="footer-logo" style="cursor:pointer" onclick="location.reload()">
-    <div class="logo-icon app-logo" aria-hidden="true">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="fR1" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#6C5CE7"/><stop offset="100%" stop-color="#A29BFE"/>
-          </linearGradient>
-          <linearGradient id="fR2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#F9CA24"/><stop offset="100%" stop-color="#E8B000"/>
-          </linearGradient>
-          <linearGradient id="fR3" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stop-color="#A29BFE"/><stop offset="100%" stop-color="#6C5CE7"/>
-          </linearGradient>
-        </defs>
-        <g fill="none" stroke-linecap="round">
-          <path d="M25 84 C 25 58, 29 40, 34 20" stroke="url(#fR1)" stroke-width="8"/>
-          <path d="M66 20 C 71 40, 75 58, 75 84" stroke="url(#fR3)" stroke-width="8"/>
-          <path d="M34 20 C 42 32, 47 46, 50 52 C 53 46, 58 32, 66 20" stroke="url(#fR2)" stroke-width="8"/>
-        </g>
-      </svg>
-    </div>
-    <span data-i18n="footer_brand">ميمو منصتي</span>
-  </div>
-  <p class="footer-copy" data-i18n="footer_note">© 2026 ميمو منصتي — جميع الحقوق محفوظة</p>
-</footer>
+</main>
 
 <script src="js/config.js"></script>
-  <script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/home.js"></script>
 
 <!-- Liquid ink engine (webgl-fluid-simulation, moteur upgrowth.dz) -->
 <script src="js/vendor/liquid-ink.js"></script>
