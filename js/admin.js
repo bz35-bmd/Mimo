@@ -49,7 +49,18 @@ const T = {
   admin_login_btn:{ar:'دخول',fr:'Se connecter',en:'Log in'},
   admin_confirm_delete:{ar:'هل أنتِ متأكدة من الحذف؟',fr:'Confirmer la suppression ?',en:'Confirm deletion?'},
   admin_price_ph:{ar:'مثال: 1,200 دج',fr:'Ex : 1 200 DA',en:'E.g. 1,200 DA'},
-  admin_tag_ph:{ar:'مثال: للمبتدئات',fr:'Ex : pour débutantes',en:'E.g. for beginners'}
+  admin_tag_ph:{ar:'مثال: للمبتدئات',fr:'Ex : pour débutantes',en:'E.g. for beginners'},
+  admin_orders:{ar:'الطلبات',fr:'Commandes',en:'Orders'},
+  admin_orders_empty:{ar:'لا توجد طلبات بعد',fr:'Aucune commande pour l\'instant',en:'No orders yet'},
+  admin_order_user:{ar:'العميلة',fr:'Cliente',en:'Client'},
+  admin_order_date:{ar:'التاريخ',fr:'Date',en:'Date'},
+  admin_order_status:{ar:'الحالة',fr:'Statut',en:'Status'},
+  admin_order_wa:{ar:'عرض على واتساب',fr:'Voir sur WhatsApp',en:'View on WhatsApp'},
+  admin_order_delete:{ar:'حذف الطلب',fr:'Supprimer la commande',en:'Delete order'},
+  st_nouvelle:{ar:'جديدة',fr:'Nouvelle',en:'New'},
+  st_confirmee:{ar:'مؤكدة',fr:'Confirmée',en:'Confirmed'},
+  st_prete:{ar:'جاهزة',fr:'Prête',en:'Ready'},
+  st_livree:{ar:'مُسلّمة',fr:'Livrée',en:'Delivered'}
 };
 
 /* ======================================================
@@ -100,6 +111,8 @@ function applyLanguage(lang){
   document.getElementById('chartMonthTitle').textContent=T.stats_last6m[lang];
   document.getElementById('statsHint').textContent=T.stats_empty_hint[lang];
   document.getElementById('usersTitle').textContent=T.admin_users[lang];
+  const oT=document.getElementById('ordersTitle');
+  if(oT) oT.textContent=T.admin_orders[lang];
   document.getElementById('topbarTitle').textContent=T.admin_title[lang];
   document.getElementById('labelTitle').textContent=T.modal_label_title[lang];
   document.getElementById('labelPrice').textContent=T.modal_label_price[lang];
@@ -127,7 +140,7 @@ document.getElementById('langSwitch').addEventListener('change',e=>applyLanguage
 /* ======================================================
    THEME
    ====================================================== */
-function setTheme(m){html.setAttribute('data-theme',m);document.getElementById('themeIcon').innerHTML=m==='dark'?'<path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/>':'<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';}
+function setTheme(m){html.setAttribute('data-theme',m);const sw=document.getElementById('themeToggle');if(sw){sw.setAttribute('aria-checked',m==='light'?'true':'false');sw.setAttribute('aria-label',m==='light'?'Passer en mode sombre':'Passer en mode clair');}}
 setTheme('dark');
 document.getElementById('themeToggle').addEventListener('click',()=>setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
 
@@ -230,7 +243,7 @@ function showAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
   lp.innerHTML=`<button class="product-btn" onclick="logout()">${T.admin_logout[currentLang]}</button>`;
   ct.classList.remove('hidden');
-  renderAdminTabs(); renderAdminGrid(); loadStats(); loadUsers();
+  renderAdminTabs(); renderAdminGrid(); loadStats(); loadUsers(); loadOrders();
 }
 function hideAdminContent(){
   const lp=document.getElementById('adminLoginPrompt'), ct=document.getElementById('adminContent');
@@ -288,6 +301,80 @@ async function changeUserRole(sel){
     alert('خطأ: '+err.message);
     loadUsers();
   }
+}
+
+/* ======================================================
+   COMMANDES (espace membre) — suivi des statuts
+   ====================================================== */
+let ordersCache=[], ordersUsers={};
+async function loadOrders(){
+  if(!sb) return;
+  try{
+    const {data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});
+    if(error){ console.error('loadOrders:',error.message); return; }
+    ordersCache=data||[];
+    ordersUsers={};
+    const ids=[...new Set(ordersCache.map(o=>o.user_id).filter(Boolean))];
+    if(ids.length){
+      try{
+        const {data:us}=await sb.from('profiles').select('id,full_name,email').in('id',ids);
+        (us||[]).forEach(u=>{ ordersUsers[u.id]=u; });
+      }catch(e){}
+    }
+    renderOrders();
+  }catch(e){ console.error('loadOrders:',e); }
+}
+function orderStatusLabel(s,lang){ return (T['st_'+s]&&T['st_'+s][lang])?T['st_'+s][lang]:s; }
+function renderOrders(){
+  const list=document.getElementById('ordersList');
+  if(!list) return;
+  const STATUSES=['nouvelle','confirmee','prete','livree'];
+  list.innerHTML=ordersCache.map(o=>{
+    const u=ordersUsers[o.user_id]||null;
+    const b=BIZ[o.business_id];
+    const bizName=b?(b.name[currentLang]||b.name.ar):o.business_id;
+    const items=(o.items&&o.items.length)?o.items:[];
+    const itemsHtml=items.map(it=>`<div class="order-item-row"><span>${it.title||''}</span><b>${it.price||''}</b></div>`).join('');
+    const selOpts=STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${orderStatusLabel(s,currentLang)}</option>`).join('');
+    const waLink='https://wa.me/'+(b?b.whatsapp:'213558253614')+'?text='+encodeURIComponent(o.whatsapp_message||'');
+    const fmtDate=(()=>{ try{ return new Date(o.created_at).toLocaleDateString(currentLang==='ar'?'ar-DZ':currentLang==='fr'?'fr-FR':'en-US',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return o.created_at; } })();
+    return `<div class="order-card">
+      <div class="order-top">
+        <span class="order-num">#${String(o.id).slice(0,8)}</span>
+        <select class="order-status" data-id="${o.id}" aria-label="${T.admin_order_status[currentLang]}">
+          ${selOpts}
+        </select>
+        <button class="delete-btn" onclick="deleteOrder('${o.id}')" title="${T.admin_order_delete[currentLang]}">🗑</button>
+      </div>
+      <div class="order-meta">
+        <span>${T.admin_order_user[currentLang]}: ${u?(u.full_name||u.email||'—'):'—'}${u&&u.full_name&&u.email?' ('+u.email+')':''}</span>
+        <span>${bizName} · ${fmtDate}</span>
+      </div>
+      <div class="order-items">${itemsHtml||'<span style="color:var(--text-muted)">—</span>'}</div>
+      ${o.total?`<div class="order-total">${T.order_total?T.order_total[currentLang]:(currentLang==='ar'?'الإجمالي':currentLang==='fr'?'Total':'Total')}: <b>${o.total}</b></div>`:''}
+      <a class="order-wa" href="${waLink}" target="_blank">${T.admin_order_wa[currentLang]} ↗</a>
+    </div>`;
+  }).join('')||`<p style="color:var(--text-muted);font-size:.85rem;padding:12px 0;">${T.admin_orders_empty[currentLang]}</p>`;
+  list.querySelectorAll('.order-status').forEach(sel=>{
+    sel.addEventListener('change',()=>setOrderStatus(sel));
+  });
+}
+async function setOrderStatus(sel){
+  const id=sel.dataset.id, status=sel.value;
+  try{
+    const {error}=await sb.from('orders').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+    if(error) throw error;
+    const o=ordersCache.find(x=>x.id===id); if(o) o.status=status;
+  }catch(err){ console.error('setOrderStatus:',err); alert('خطأ: '+err.message); loadOrders(); }
+}
+async function deleteOrder(id){
+  if(!confirm(T.admin_confirm_delete[currentLang])) return;
+  try{
+    const {error}=await sb.from('orders').delete().eq('id',id);
+    if(error) throw error;
+    ordersCache=ordersCache.filter(o=>o.id!==id);
+    renderOrders();
+  }catch(err){ console.error('deleteOrder:',err); alert('خطأ: '+err.message); }
 }
 
 /* ======================================================

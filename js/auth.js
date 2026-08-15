@@ -40,7 +40,6 @@ function setAuthUI(user){
   authUser=user;
   const btn=document.getElementById('authBtn');
   const dd=document.getElementById('userMenu');
-  const mb=document.getElementById('authMobile');
   const initial=(user?((user.full_name||user.email||'م').trim()[0]||'م'):'م').toUpperCase();
   if(btn){
     if(user){
@@ -51,10 +50,19 @@ function setAuthUI(user){
       btn.classList.remove('logged');
     }
   }
-  if(mb){
-    mb.textContent=user?T.auth_logout[currentLang]:T.auth_login[currentLang];
-    if(user) mb.removeAttribute('data-i18n'); else mb.setAttribute('data-i18n','auth_login');
+  const mAv=document.getElementById('mAvatar');
+  const mNm=document.getElementById('mName');
+  const mMail=document.getElementById('mMail');
+  const mAdmin=document.getElementById('mAdmin');
+  if(mAv) mAv.textContent=user?initial:'م';
+  if(mNm){
+    mNm.textContent=user?(user.full_name||user.email||''):T.auth_login[currentLang];
+    if(user) mNm.removeAttribute('data-i18n'); else mNm.setAttribute('data-i18n','auth_login');
   }
+  if(mMail) mMail.textContent=user?(user.email||''):'—';
+  if(mAdmin) mAdmin.style.display=(user&&user.role==='admin')?'':'none';
+  const mLogoutEl=document.getElementById('mLogout');
+  if(mLogoutEl) mLogoutEl.style.display=user?'':'none';
   if(dd&&user){
     dd.querySelector('.um-avatar').textContent=initial;
     dd.querySelector('.um-name').textContent=user.full_name||user.email||'';
@@ -97,13 +105,19 @@ async function touchLastSeen(uid){
 function initAuth(){
   if(!sb) return;
   sb.auth.onAuthStateChange((event,session)=>{
-    if(event==='SIGNED_OUT'){ setAuthUI(null); return; }
+    if(event==='SIGNED_OUT'){ setAuthUI(null); if(typeof loadMyFavs==='function') loadMyFavs(); return; }
     if(session&&session.user){
       if(event==='SIGNED_IN') trackEvent('login',{});
       loadProfile(session.user);
+      if(typeof loadMyFavs==='function') loadMyFavs(session.user);
     }
   });
-  sb.auth.getSession().then(({data})=>{ if(data.session&&data.session.user) loadProfile(data.session.user); });
+  sb.auth.getSession().then(({data})=>{
+    if(data.session&&data.session.user){
+      loadProfile(data.session.user);
+      if(typeof loadMyFavs==='function') loadMyFavs(data.session.user);
+    }
+  });
 }
 function authPageMode(){ return document.body.dataset.authPage||''; }
 function checkRecovery(){
@@ -127,11 +141,20 @@ function initAuthUI(){
   document.addEventListener('click',()=>{ const m=document.getElementById('userMenu'); if(m) m.classList.remove('open'); });
   const authMobile=document.getElementById('authMobile');
   if(authMobile) authMobile.addEventListener('click',e=>{
+    if(e.target.closest('a')) return;
     e.preventDefault();
     const nav=document.getElementById('mobileNav'),ov=document.getElementById('navOverlay');
     if(nav) nav.classList.remove('open');
     if(ov) ov.classList.remove('open');
-    if(authUser) logout(); else location.href='login.html';
+    if(authUser) location.href='membre.html'; else location.href='login.html';
+  });
+  const mLogoutBtn=document.getElementById('mLogout');
+  if(mLogoutBtn) mLogoutBtn.addEventListener('click',e=>{
+    e.preventDefault(); e.stopPropagation();
+    const nav=document.getElementById('mobileNav'),ov=document.getElementById('navOverlay');
+    if(nav) nav.classList.remove('open');
+    if(ov) ov.classList.remove('open');
+    logout();
   });
   initAuth();
   const mode=authPageMode();

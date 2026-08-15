@@ -143,3 +143,102 @@ async function trackEvent(type,meta){
   }catch(e){ console.warn('trackEvent:',e); }
 }
 function initAnalytics(){ if(sb) trackEvent('page_view',{}); }
+
+/* ======================================================
+   ESPACE MEMBRE — favoris + commandes WhatsApp (P0)
+   ====================================================== */
+let mmFavIds=new Set();
+let mmFavs=[];
+
+async function loadMyFavs(user){
+  const u=user||authUser;
+  if(!sb||!u){ mmFavIds=new Set(); mmFavs=[]; refreshFavHearts(); return; }
+  try{
+    const {data}=await sb.from('favorites').select('*').eq('user_id',u.id);
+    mmFavs=data||[];
+    mmFavIds=new Set(mmFavs.map(f=>f.business_id+'|'+f.item_id));
+  }catch(e){ console.warn('loadMyFavs:',e); }
+  refreshFavHearts();
+}
+function isFav(bizId,itemId){ return mmFavIds.has(bizId+'|'+itemId); }
+function refreshFavHearts(){
+  document.querySelectorAll('.fav-btn[data-biz][data-item]').forEach(btn=>{
+    btn.classList.toggle('active',mmFavIds.has(btn.dataset.biz+'|'+btn.dataset.item));
+  });
+}
+async function toggleFav(bizId,btn){
+  if(!sb||!authUser){
+    showToast(T.fav_login_hint[currentLang],'info');
+    location.href='login.html';
+    return null;
+  }
+  const item={id:btn.dataset.item||'',title:btn.dataset.title||'',price:btn.dataset.price||'',image_url:btn.dataset.image||''};
+  const key=bizId+'|'+item.id;
+  try{
+    if(mmFavIds.has(key)){
+      const {error}=await sb.from('favorites').delete().eq('user_id',authUser.id).eq('business_id',bizId).eq('item_id',item.id);
+      if(error) throw error;
+      mmFavIds.delete(key);
+      mmFavs=mmFavs.filter(f=>!(f.business_id===bizId&&f.item_id===item.id));
+      showToast(T.fav_removed[currentLang],'info');
+      refreshFavHearts();
+      return false;
+    }
+    const {error}=await sb.from('favorites').insert({user_id:authUser.id,business_id:bizId,item_id:item.id,title:item.title,price:item.price,image_url:item.image_url});
+    if(error) throw error;
+    mmFavIds.add(key);
+    mmFavs.unshift({business_id:bizId,item_id:item.id,title:item.title,price:item.price,image_url:item.image_url,created_at:new Date().toISOString()});
+    showToast(T.fav_added[currentLang],'success');
+    refreshFavHearts();
+    return true;
+  }catch(err){ console.warn('toggleFav:',err); showToast(T.toast_error[currentLang]+': '+err.message,'error'); return null; }
+}
+
+function waProductMessage(bizId,item,profile){
+  const lines=[currentLang==='ar'?'مرحبًا، أريد طلب:':currentLang==='fr'?'Bonjour, je souhaite commander :':'Hello, I would like to order:'];
+  lines.push('• '+(item.title||'')+(item.price?' — '+item.price:''));
+  if(profile&&profile.full_name) lines.push(currentLang==='ar'?'الاسم: '+profile.full_name:currentLang==='fr'?'Nom : '+profile.full_name:'Name: '+profile.full_name);
+  if(profile&&profile.phone) lines.push(currentLang==='ar'?'الهاتف: '+profile.phone:currentLang==='fr'?'Téléphone : '+profile.phone:'Phone: '+profile.phone);
+  const loc=[];
+  if(profile&&profile.wilaya) loc.push(profile.wilaya);
+  if(profile&&profile.commune) loc.push(profile.commune);
+  if(loc.length) lines.push(currentLang==='ar'?'العنوان: '+loc.join('، '):currentLang==='fr'?'Adresse : '+loc.join(', '):'Address: '+loc.join(', '));
+  return lines.join('\n');
+}
+
+async function placeOrder(bizId,item){
+  const b=BIZ[bizId];
+  if(!sb||!authUser){
+    window.open('https://wa.me/'+b.whatsapp+'?text='+encodeURIComponent(waProductMessage(bizId,item,null)),'_blank');
+    return null;
+  }
+  let profile=null;
+  try{
+    const {data}=await sb.from('profiles').select('full_name,phone,wilaya,commune').eq('id',authUser.id).maybeSingle();
+    profile=data||null;
+  }catch(e){}
+  const msg=waProductMessage(bizId,item,profile);
+  try{
+    const {error}=await sb.from('orders').insert({
+      user_id:authUser.id,
+      business_id:bizId,
+      items:[{title:item.title,price:item.price||'',image_url:item.image_url||''}],
+      total:item.price||'',
+      whatsapp_message:msg,
+      status:'nouvelle'
+    });
+    if(error) throw error;
+    showToast(T.order_created[currentLang],'success');
+  }catch(err){ console.warn('placeOrder:',err); showToast(T.toast_error[currentLang]+': '+err.message,'error'); }
+  window.open('https://wa.me/'+b.whatsapp+'?text='+encodeURIComponent(msg),'_blank');
+  return null;
+}
+
+/* Clic sur « Commander » d'une carte produit :
+   - connecté(e) → enregistre la commande + ouvre WhatsApp (pré-rempli)
+   - invité(e) → lien WhatsApp classique (comportement actuel) */
+function orderFromCard(bizId,el){
+  const item={id:el.dataset.id||'',title:el.dataset.title||'',price:el.dataset.price||'',image_url:el.dataset.image||''};
+  if(sb&&authUser){ placeOrder(bizId,item); return false; }
+  return true;
+}

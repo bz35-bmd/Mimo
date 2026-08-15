@@ -65,8 +65,12 @@
     + '<button class="lang-option" data-lang="fr" type="button"><span class="lang-flag">FR</span><span>Français</span></button>'
     + '<button class="lang-option" data-lang="en" type="button"><span class="lang-flag">EN</span><span>English</span></button>'
     + '</div></div>'
-    + '<button class="theme-btn" id="themeToggle">'
-    + '<svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>'
+    + '<button class="theme-switch" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Basculer le thème">'
+    + '<span class="tsw-track" aria-hidden="true">'
+    + '<svg class="tsw-icon tsw-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.1 5.1l1.55 1.55M17.35 17.35l1.55 1.55M18.9 5.1l-1.55 1.55M6.65 17.35l-1.55 1.55"/></svg>'
+    + '<span class="tsw-knob"></span>'
+    + '<svg class="tsw-icon tsw-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>'
+    + '</span>'
     + '</button>'
     + '<button class="theme-btn" id="settingsBtn" aria-label="Réglages">'
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.01a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>'
@@ -78,6 +82,9 @@
     + '</button>'
     + '<div class="user-menu" id="userMenu">'
     + '<div class="um-head"><div class="um-avatar" id="umAvatar">م</div><div class="um-meta"><div class="um-name" id="umName">—</div><div class="um-email" id="umEmail">—</div><span class="um-role" id="umRole"></span></div></div>'
+    + '<a class="um-btn" id="umMember" href="membre.html">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+    + '<span data-i18n="nav_member">مساحتي</span></a>'
     + '<a class="um-btn um-admin" id="umAdmin" href="admin.html" style="display:none">'
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><circle cx="12" cy="10" r="2.5"/></svg>'
     + '<span data-i18n="nav_admin">لوحة الإدارة</span></a>'
@@ -85,8 +92,9 @@
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>'
     + '<span data-i18n="auth_logout">تسجيل الخروج</span></button>'
     + '</div></div>'
-    + '<button class="burger" id="burgerBtn">☰</button>'
-    + '</div></header>';
+    + '</div>'
+    + '<button class="burger" id="burgerBtn" aria-label="Menu">☰</button>'
+    + '</header>';
 
   /* ---- SETTINGS PANEL ---- */
   shell += '<div class="settings-panel" id="settingsPanel" aria-hidden="true">'
@@ -121,11 +129,45 @@
   shell += '<div class="overlay" id="navOverlay"></div>'
     + '<nav class="mobile-nav" id="mobileNav">'
     + '<button class="close-btn" id="closeNav">✕</button>'
+    + '<div class="m-profile" id="authMobile">'
+    + '<div class="m-avatar" id="mAvatar">م</div>'
+    + '<div class="m-meta"><div class="m-name" id="mName" data-i18n="auth_login">تسجيل الدخول</div>'
+    + '<div class="m-mail" id="mMail">—</div></div>'
+    + '<a class="m-admin" id="mAdmin" href="admin.html" style="display:none">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5z"/><circle cx="12" cy="10" r="2.5"/></svg></a>'
+    + '<button class="m-logout" id="mLogout" type="button" style="display:none" aria-label="Déconnexion">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>'
+    + '</div>'
+    + '<div class="m-search">'
+    + '<svg class="m-s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>'
+    + '<input type="text" class="m-search-input" id="mSearchInput" autocomplete="off" data-i18n-placeholder="search_placeholder" placeholder="بحث...">'
+    + '<div class="m-search-results" id="mSearchResults"></div>'
+    + '</div>'
+    + '<div class="m-divider"></div>'
     + '<a href="index.html" data-nav="home" data-i18n="tab_home">الرئيسية</a>'
     + '<a href="mercerie.html" data-nav="mercerie" data-i18n="tab_mercerie">ميمو مرسيري</a>'
     + '<a href="afrah.html" data-nav="rental"><span data-i18n="tab_rental">ميمو أفراح</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
     + '<a href="cake.html" data-nav="patisserie"><span data-i18n="tab_patisserie">ميمو كيك</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
-    + '<a href="#" id="authMobile" data-i18n="auth_login">تسجيل الدخول</a>'
+    + '<div class="m-divider"></div>'
+    + '<div class="m-actions">'
+    + '<div class="m-lang">'
+    + '<button class="m-lang-btn" data-mlang="ar" type="button"><span class="lang-flag">AR</span><span>العربية</span></button>'
+    + '<button class="m-lang-btn" data-mlang="fr" type="button"><span class="lang-flag">FR</span><span>Français</span></button>'
+    + '<button class="m-lang-btn" data-mlang="en" type="button"><span class="lang-flag">EN</span><span>English</span></button>'
+    + '</div>'
+    + '<div class="m-tools">'
+    + '<button class="theme-switch" id="mThemeToggle" type="button" role="switch" aria-checked="false" aria-label="Basculer le thème">'
+    + '<span class="tsw-track" aria-hidden="true">'
+    + '<svg class="tsw-icon tsw-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.1 5.1l1.55 1.55M17.35 17.35l1.55 1.55M18.9 5.1l-1.55 1.55M6.65 17.35l-1.55 1.55"/></svg>'
+    + '<span class="tsw-knob"></span>'
+    + '<svg class="tsw-icon tsw-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>'
+    + '</span>'
+    + '</button>'
+    + '<button class="theme-btn m-settings" id="mSettingsBtn" aria-label="Réglages">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.01a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>'
+    + '</button>'
+    + '</div>'
+    + '</div>'
     + '</nav>';
 
   /* ---- SOCIAL PROOF ---- */
@@ -217,16 +259,24 @@
     if(THEMES.indexOf(m)<0) m='dark';
     html.setAttribute('data-theme',m);
     const isLight=LIGHT_THEMES.indexOf(m)>=0;
-    const icon=document.getElementById('themeIcon');
-    if(icon) icon.innerHTML=isLight?'<path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/>':'<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+    const sw=document.getElementById('themeToggle');
+    if(sw){
+      sw.setAttribute('aria-checked',isLight?'true':'false');
+      const L=T.theme_toggle; if(L) sw.setAttribute('aria-label',L[currentLang]);
+    }
+    const msw=document.getElementById('mThemeToggle');
+    if(msw){
+      msw.setAttribute('aria-checked',isLight?'true':'false');
+      const L=T.theme_toggle; if(L) msw.setAttribute('aria-label',L[currentLang]);
+    }
     document.querySelectorAll('#themeOptions .settings-opt').forEach(b=>b.classList.toggle('active',b.dataset.theme===m));
     try{localStorage.setItem('mm_theme',m);}catch(e){}
   }
   let savedTheme='light'; try{ savedTheme=localStorage.getItem('mm_theme')||'light'; }catch(e){}
   setTheme(savedTheme);
   document.getElementById('themeToggle').addEventListener('click',()=>{
-    const i=THEMES.indexOf(html.getAttribute('data-theme'));
-    setTheme(THEMES[(i+1)%THEMES.length]);
+    const isLight=LIGHT_THEMES.indexOf(html.getAttribute('data-theme'))>=0;
+    setTheme(isLight?'dark':'light');
   });
   document.querySelectorAll('#themeOptions .settings-opt').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.theme)));
 
@@ -344,6 +394,18 @@
   navOverlay.addEventListener('click',closeMenu);
   window.closeMenu=closeMenu;
 
+  /* ---- Drawer : outils (thème, langue, réglages) ---- */
+  const mTheme=document.getElementById('mThemeToggle');
+  if(mTheme) mTheme.addEventListener('click',()=>{
+    const isLight=LIGHT_THEMES.indexOf(html.getAttribute('data-theme'))>=0;
+    setTheme(isLight?'dark':'light');
+  });
+  const mSettingsBtn=document.getElementById('mSettingsBtn');
+  if(mSettingsBtn) mSettingsBtn.addEventListener('click',e=>{e.stopPropagation();closeMenu();openSettings();});
+  document.querySelectorAll('.m-lang-btn').forEach(b=>b.addEventListener('click',()=>{
+    applyLanguage(b.dataset.mlang); closeMenu();
+  }));
+
   /* ---- Search ---- */
   function initSearch(){
     const wrap=document.getElementById('searchWrap');
@@ -371,12 +433,10 @@
     input.addEventListener('input',()=>runSearch(input.value));
     input.addEventListener('focus',()=>{ if(input.value.trim().length>=2) runSearch(input.value); });
   }
-  window.runSearch=function(q){
-    const input=document.getElementById('searchInput'), results=document.getElementById('searchResults');
-    if(!input||!results) return;
+  window.searchCatalog=function(q){
     const query=q.trim().toLowerCase();
-    if(query.length<2){ results.classList.remove('open'); return; }
-    let matches=[];
+    const matches=[];
+    if(query.length<2) return matches;
     Object.values(BIZ).forEach(b=>{
       (allData[b.id].products||[]).forEach(p=>{
         const t=(p.title||'').toLowerCase(); const pr=(p.price||'').toLowerCase();
@@ -387,6 +447,13 @@
         if(t.includes(query)) matches.push({type:'article',biz:b,item:a});
       });
     });
+    return matches;
+  };
+  window.runSearch=function(q){
+    const input=document.getElementById('searchInput'), results=document.getElementById('searchResults');
+    if(!input||!results) return;
+    const matches=searchCatalog(q);
+    if(q.trim().length<2){ results.classList.remove('open'); return; }
     if(!matches.length){ results.innerHTML='<div class="search-empty">'+(currentLang==='ar'?'لا توجد نتائج':currentLang==='fr'?'Aucun résultat':'No results')+'</div>'; }
     else{
       results.innerHTML=matches.slice(0,8).map(m=>'<div class="search-result-item" onclick="goToResult(\''+m.biz.id+'\')">'
@@ -399,9 +466,33 @@
   };
   window.goToResult=function(bizId){ location.href=bizPage(bizId); };
 
+  /* ---- Drawer : recherche ---- */
+  const mSearchInput=document.getElementById('mSearchInput'),
+        mSearchResults=document.getElementById('mSearchResults');
+  if(mSearchInput&&mSearchResults){
+    mSearchInput.addEventListener('input',()=>{
+      const matches=searchCatalog(mSearchInput.value);
+      if(!matches.length){ mSearchResults.classList.remove('open'); mSearchResults.innerHTML=''; return; }
+      mSearchResults.innerHTML=matches.slice(0,6).map(m=>'<button class="ms-item" type="button" data-biz="'+m.biz.id+'">'
+        +'<span class="sr-emoji">'+m.biz.emoji+'</span>'
+        +'<span class="ms-title">'+m.item.title+'</span>'
+        +(m.item.price?'<span class="ms-price">'+m.item.price+'</span>':'')
+        +'</button>').join('');
+      mSearchResults.classList.add('open');
+    });
+    mSearchResults.addEventListener('click',e=>{
+      const it=e.target.closest('.ms-item'); if(!it) return;
+      location.href=bizPage(it.dataset.biz);
+    });
+  }
+
   /* ---- Reveal ---- */
   window.initReveal=function(){
-    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>{
+    const els=document.querySelectorAll('.reveal:not(.visible)');
+    if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('visible')); return; }
+    els.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight&&r.bottom>0){ el.classList.add('visible'); return; }
       const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.12});
       io.observe(el);
     });

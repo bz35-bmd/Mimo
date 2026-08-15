@@ -1,6 +1,7 @@
 /* ======================================================
    STORE — rendu boutique, quick view, sticky CTA
    ====================================================== */
+function escAttr(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
 function renderStore(bizId){
   const b=BIZ[bizId]; if(!b) return;
   const products=allData[bizId].products;
@@ -34,6 +35,9 @@ function renderStore(bizId){
       const waText=encodeURIComponent('مرحبًا، أريد الاستفسار عن '+p.title+(p.price?' — السعر: '+p.price:''));
       return '<div class="product-card reveal">'
         +'<div class="product-img">'+(p.image_url?'<img src="'+p.image_url+'" alt="'+p.title+'">':'<span class="placeholder-icon">'+b.emoji+'</span>')
+        +'<button type="button" class="fav-btn" data-biz="'+bizId+'" data-item="'+escAttr(p.id)+'" data-title="'+escAttr(p.title)+'" data-price="'+escAttr(p.price||'')+'" data-image="'+escAttr(p.image_url||'')+'" aria-label="Favori" onclick="event.stopPropagation();toggleFav(\''+bizId+'\',this)">'
+        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+        +'</button>'
         +'<div class="card-quick-view" onclick="openQuickView(\''+(p.title||'').replace(/'/g,"\\'")+'\',\''+(p.price||'').replace(/'/g,"\\'")+'\',\''+(p.description||'').replace(/'/g,"\\'")+'\',\''+(p.image_url||'').replace(/'/g,"\\'")+'\',\''+b.whatsapp+'\',\''+waText.replace(/'/g,"\\'")+'\')"><span>👁 '+(currentLang==='ar'?'عرض سريع':currentLang==='fr'?'Aperçu rapide':'Quick view')+'</span></div>'
         +'</div>'
         +'<div class="product-body">'
@@ -41,7 +45,7 @@ function renderStore(bizId){
         +'<div class="card-rating"><span class="stars">'+'★'.repeat(rating)+'☆'.repeat(5-rating)+'</span><span class="count">('+reviewCount+')</span></div>'
         +'<h3>'+p.title+'</h3>'
         +(p.price?'<span class="price">'+p.price+'</span>':'')
-        +'<a href="https://wa.me/'+b.whatsapp+'?text='+waText+'" target="_blank" class="product-btn">'+T.prod_btn[currentLang]+'</a>'
+        +'<a href="https://wa.me/'+b.whatsapp+'?text='+waText+'" target="_blank" class="product-btn" data-id="'+escAttr(p.id)+'" data-title="'+escAttr(p.title)+'" data-price="'+escAttr(p.price||'')+'" data-image="'+escAttr(p.image_url||'')+'" onclick="return orderFromCard(\''+bizId+'\',this)">'+T.prod_btn[currentLang]+'</a>'
         +'</div></div>';
     }).join(''):'<p style="text-align:center;grid-column:1/-1;color:var(--text-muted);padding:40px 0;">'+(currentLang==='ar'?'لا توجد منتجات بعد':currentLang==='fr'?'Aucun produit':'No products yet')+'</p>')+'</div></div>'
 
@@ -91,6 +95,7 @@ function renderStore(bizId){
 
   const floatWa=document.getElementById('floatWa');
   if(floatWa) floatWa.href='https://wa.me/'+b.whatsapp;
+  refreshFavHearts();
   renderCommentForm(bizId);
   loadComments(bizId);
   setTimeout(()=>initReveal(),100);
