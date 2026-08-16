@@ -3,17 +3,17 @@
    ====================================================== */
 const BIZ = {
   mercerie: {
-    id:'mercerie', emoji:'✂️',
-    name:{ar:'ميمو مرسيري',fr:'M Mercerie',en:'M Mercerie'},
-    tagline:{ar:'كل خيط، كل زر، كل فكرة',fr:'Chaque fil, chaque bouton, chaque idée',en:'Every thread, every button, every idea'},
-    location:{ar:'بوعردون، بومرداس',fr:'Bouârdoun, Boumerdès',en:'Bouârdoun, Boumerdès'},
-    phone:'0558 25 36 14', whatsapp:'213558253614',
-    hero_sub:{ar:'كل ما تحتاجينه من خيوط وأزرار وإبر، مُنظَّم وجاهز للطلب خلال دقيقتين',fr:'Tout ce qu\'il vous faut, prêt à commander en 2 minutes',en:'Everything you need, ready to order in 2 minutes'},
+    id:'mercerie', emoji:'🎀',
+    name:{ar:'ميمو ديكور',fr:'M Déco',en:'M Deco'},
+    tagline:{ar:'لمسة سحرية لكل مناسبة',fr:'Une touche magique pour chaque occasion',en:'A magical touch for every occasion'},
+    location:{ar:'يسر، بومرداس',fr:'Isser, Boumerdès',en:'Isser, Boumerdès'},
+    phone:'0541 92 01 13', whatsapp:'213541920113',
+    hero_sub:{ar:'ديكور المناسبات: نُقران، ميروارات، حوامل وعرض — مُنظَّم وجاهز للطلب خلال دقيقتين',fr:'Décoration d\'événements : nappes, plateaux miroirs, présentoirs — prêts à commander',en:'Event decor: tablecloths, mirror trays, stands — ready to order'},
     categories:[
-      {id:'threads',title:{ar:'خيوط',fr:'Fils',en:'Threads'},sub:{ar:'ألوان متعددة',fr:'Coloris variés',en:'Many colors'},icon:'🧵'},
-      {id:'buttons',title:{ar:'أزرار',fr:'Boutons',en:'Buttons'},sub:{ar:'أشكال متنوعة',fr:'Formes variées',en:'Various shapes'},icon:'🔘'},
-      {id:'needles',title:{ar:'إبر',fr:'Aiguilles',en:'Needles'},sub:{ar:'لكل نوع قماش',fr:'Pour chaque tissu',en:'For every fabric'},icon:'🪡'},
-      {id:'accessories',title:{ar:'إكسسوارات',fr:'Accessoires',en:'Accessories'},sub:{ar:'لمسة أخيرة',fr:'Touche finale',en:'Finishing touch'},icon:'✨'}
+      {id:'nappes',title:{ar:'نُقران',fr:'Nappes',en:'Tablecloths'},sub:{ar:'ألوان وتصاميم متنوعة',fr:'Coloris et motifs variés',en:'Many colors & patterns'},icon:'🍽️'},
+      {id:'mirror_trays',title:{ar:'ميروارات',fr:'Plateaux miroirs',en:'Mirror trays'},sub:{ar:'أناقة فاخرة',fr:'Élégance raffinée',en:'Elegant touch'},icon:'🪞'},
+      {id:'stands',title:{ar:'حوامل وعرض',fr:'Présentoirs',en:'Stands'},sub:{ar:'للحلويات والهدايا',fr:'Pour gâteaux et cadeaux',en:'For sweets & gifts'},icon:'🏺'},
+      {id:'event_decor',title:{ar:'ديكور مناسبات',fr:'Déco d\'événement',en:'Event decor'},sub:{ar:'لمسة أخيرة ساحرة',fr:'La touche finale',en:'The finishing touch'},icon:'✨'}
     ],
     trust:[
       {ar:'تشكيلة تتجدد أسبوعيًا',fr:'Nouveautés chaque semaine',en:'New arrivals weekly'},
@@ -22,14 +22,14 @@ const BIZ = {
       {ar:'جودة مضمونة',fr:'Qualité garantie',en:'Guaranteed quality'}
     ],
     testimonials:[
-      {text:{ar:'"جودة الخيوط ممتازة والرد سريعًا عبر واتساب."',fr:'"Excellente qualité de fils et réponse rapide."',en:'"Great thread quality and fast replies."'},who:{ar:'زبونة من بومرداس',fr:'Cliente de Boumerdès',en:'Boumerdès customer'},avatar:'ب'},
-      {text:{ar:'"وجدتُ كل المستلزمات في مكان واحد."',fr:'"J\'ai trouvé tout au même endroit."',en:'"Found everything in one place."'},who:{ar:'زبونة دائمة',fr:'Cliente fidèle',en:'Regular customer'},avatar:'ز'},
-      {text:{ar:'"أسعار معقولة وتشكيلة رائعة."',fr:'"Prix raisonnables et superbe sélection."',en:'"Fair prices and wonderful selection."'},who:{ar:'هاوية خياطة',fr:'Passionnée de couture',en:'Sewing enthusiast'},avatar:'ه'}
+      {text:{ar:'"الميروارات كانت مذهلة، كل الضيوف سألوا عنها!"',fr:'"Les plateaux miroirs étaient magnifiques !"' ,en:'"The mirror trays were stunning!"'},who:{ar:'عروس سعيدة',fr:'Mariée comblée',en:'Happy bride'},avatar:'ع'},
+      {text:{ar:'"النُقران بجودة ممتازة وألوان تنسّق مع كل شيء."',fr:'"Nappes d\'excellente qualité, des couleurs qui assortissent tout."',en:'"Great tablecloths, colors that match everything."'},who:{ar:'منسقة حفلات',fr:'Organisatrice d\'événements',en:'Event planner'},avatar:'م'},
+      {text:{ar:'"توصيل سريع وديكور جاهز للتقديم."',fr:'"Livraison rapide et déco prête à servir."',en:'"Fast delivery, decor ready to serve."'},who:{ar:'عميلة دائمة',fr:'Cliente fidèle',en:'Regular customer'},avatar:'ز'}
     ],
-    about:{ar:'ميمو من فكرة بسيطة: تيسير الوصول إلى مستلزمات خياطة جيدة بأسعار عادلة.',fr:'M est née d\'une idée simple : rendre les fournitures de couture accessibles.',en:'M started with a simple idea: accessible quality sewing supplies.'},
+    about:{ar:'ميمو ديكور وُلدت من شغف بتزيين المناسبات: نُقران، ميروارات وحوامل مختارة بعناية لنجعل كل حفلة لا تُنسى.',fr:'M Déco est née d\'une passion pour la décoration : nappes, plateaux miroirs et présentoirs choisis avec soin pour rendre chaque fête inoubliable.',en:'M Deco was born from a passion for event decor: tablecloths, mirror trays and stands chosen with care to make every party unforgettable.'},
     faq:[
       {q:{ar:'كيف يتم التوصيل؟',fr:'Livraison ?',en:'Delivery?'},a:{ar:'نوصل إلى بومرداس والجزائر خلال 24-48 ساعة، والدفع عند الاستلام.',fr:'Sous 24-48h, paiement à la livraison.',en:'Within 24-48h, cash on delivery.'}},
-      {q:{ar:'هل يمكن استبدال منتج؟',fr:'Échange ?',en:'Exchange?'},a:{ar:'نعم، تواصلي معنا عبر واتساب خلال 3 أيام من الاستلام.',fr:'Oui, sur WhatsApp sous 3 jours.',en:'Yes, on WhatsApp within 3 days.'}}
+      {q:{ar:'هل يمكن طلب ديكور حسب المناسبة؟',fr:'Déco personnalisée ?',en:'Custom decor?'},a:{ar:'نعم، تواصلي معنا عبر واتساب وصفّي ما تحتاجينه ونحن نجهّزه لك.',fr:'Oui, contactez-nous sur WhatsApp et décrivez votre besoin.',en:'Yes, message us on WhatsApp and describe your need.'}}
     ],
     storage_bucket:'mimo-images', table_products:'mercerie_products', table_articles:'mercerie_articles'
   },
@@ -38,7 +38,7 @@ const BIZ = {
     name:{ar:'ميمو أفراح',fr:'M Afrah',en:'M Afrah'},
     tagline:{ar:'كل ما يحتاجه عرسك',fr:'Tout pour votre mariage',en:'Everything your wedding needs'},
     location:{ar:'الجزائر العاصمة',fr:'Alger',en:'Algiers'},
-    phone:'0558 25 36 14', whatsapp:'213558253614',
+    phone:'0541 92 01 13', whatsapp:'213541920113',
     hero_sub:{ar:'نؤجّر الطاولات والكراسي والديكور والإضاءة والخيام',fr:'Location de tables, chaises, décoration et tentes',en:'Rent tables, chairs, decor, lighting & tents'},
     categories:[
       {id:'tables',title:{ar:'طاولات',fr:'Tables',en:'Tables'},sub:{ar:'ضيافة وأعياد',fr:'Réception',en:'Reception'},icon:'🪑'},
@@ -70,7 +70,7 @@ const BIZ = {
     name:{ar:'ميمو كيك',fr:'M Cake',en:'M Cake'},
     tagline:{ar:'كعكة أحلامكِ... تُولد هنا',fr:'Votre gâteau de rêve... prend vie ici',en:'Your dream cake... comes to life here'},
     location:{ar:'الجزائر العاصمة',fr:'Alger',en:'Algiers'},
-    phone:'0558 25 36 14', whatsapp:'213558253614',
+    phone:'0541 92 01 13', whatsapp:'213541920113',
     hero_sub:{ar:'كعكات مصممة خصيصًا لكِ، بمكونات فاخرة وتفاصيل مذهلة',fr:'Gâteaux sur mesure avec ingrédients raffinés',en:'Custom cakes with premium ingredients'},
     categories:[
       {id:'wedding',title:{ar:'أعراس',fr:'Mariage',en:'Wedding'},sub:{ar:'تصاميم فاخرة',fr:'Créations raffinées',en:'Elegant designs'},icon:'👰'},

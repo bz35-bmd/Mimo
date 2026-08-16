@@ -14,7 +14,7 @@ function fmtDate(iso){
 }
 function statusLabel(s){ return (T['st_'+s]&&T['st_'+s][currentLang])?T['st_'+s][currentLang]:s; }
 function bizName(id){ const b=BIZ[id]; return b&&b.name?(b.name[currentLang]||b.name.ar):id; }
-function bizWa(id){ return (BIZ[id]&&BIZ[id].whatsapp)?BIZ[id].whatsapp:'213558253614'; }
+function bizWa(id){ return (BIZ[id]&&BIZ[id].whatsapp)?BIZ[id].whatsapp:'213541920113'; }
 
 function root(){ return document.getElementById('memberRoot'); }
 

@@ -37,7 +37,7 @@
     + '</div></div>'
     + '<nav class="topbar-nav" id="topbarNav">'
     + '<a href="index.html" data-nav="home" data-i18n="tab_home">الرئيسية</a>'
-    + '<a href="mercerie.html" data-nav="mercerie" data-i18n="tab_mercerie">ميمو مرسيري</a>'
+    + '<a href="mercerie.html" data-nav="mercerie" data-i18n="tab_mercerie">ميمو ديكور</a>'
     + '<a href="afrah.html" data-nav="rental"><span data-i18n="tab_rental">ميمو أفراح</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
     + '<a href="cake.html" data-nav="patisserie"><span data-i18n="tab_patisserie">ميمو كيك</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
     + '</nav>'
@@ -145,7 +145,7 @@
     + '</div>'
     + '<div class="m-divider"></div>'
     + '<a href="index.html" data-nav="home" data-i18n="tab_home">الرئيسية</a>'
-    + '<a href="mercerie.html" data-nav="mercerie" data-i18n="tab_mercerie">ميمو مرسيري</a>'
+    + '<a href="mercerie.html" data-nav="mercerie" data-i18n="tab_mercerie">ميمو ديكور</a>'
     + '<a href="afrah.html" data-nav="rental"><span data-i18n="tab_rental">ميمو أفراح</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
     + '<a href="cake.html" data-nav="patisserie"><span data-i18n="tab_patisserie">ميمو كيك</span><span class="cs-chip" data-i18n="cs_nav">قريبًا</span></a>'
     + '<div class="m-divider"></div>'
@@ -203,7 +203,7 @@
       + '<p data-i18n="exit_desc">احصلِ على خصم 10% على طلبكِ الأول! استخدمي كود <strong>WELCOME10</strong></p>'
       + '<div class="exit-offer"><div class="offer-text" data-i18n="exit_offer">✨ كود WELCOME10 — صالح لمدة 24 ساعة</div></div>'
       + '<div class="exit-actions">'
-      + '<a class="exit-wa" href="https://wa.me/213558253614?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B!%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85%20%D9%83%D9%88%D8%AF%20WELCOME10%20%D9%84%D9%84%D8%AE%D8%B5%D9%85" target="_blank" data-i18n="exit_btn">استخدم العرض الآن</a>'
+      + '<a class="exit-wa" href="https://wa.me/213541920113?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B!%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85%20%D9%83%D9%88%D8%AF%20WELCOME10%20%D9%84%D9%84%D8%AE%D8%B5%D9%85" target="_blank" data-i18n="exit_btn">استخدم العرض الآن</a>'
       + '<button class="exit-close" onclick="closeExitPopup()" data-i18n="exit_later">لاحقًا</button>'
       + '</div></div></div>';
   }
@@ -211,8 +211,8 @@
   /* ---- STICKY CTA ---- */
   if(hasCTA){
     shell += '<div class="sticky-cta" id="stickyCta">'
-      + '<div class="cta-info"><div class="cta-title" id="ctaTitle">ميمو مرسيري</div><div class="cta-sub" id="ctaSub">اطلب الآن عبر واتساب</div></div>'
-      + '<a class="cta-wa" id="ctaWa" href="https://wa.me/213558253614" target="_blank">' + waSvg + ' WhatsApp</a>'
+      + '<div class="cta-info"><div class="cta-title" id="ctaTitle">ميمو ديكور</div><div class="cta-sub" id="ctaSub">اطلب الآن عبر واتساب</div></div>'
+      + '<a class="cta-wa" id="ctaWa" href="https://wa.me/213541920113" target="_blank">' + waSvg + ' WhatsApp</a>'
       + '</div>';
   }
 
@@ -235,7 +235,7 @@
   /* ---- BACK TO TOP / WHATSAPP / FOOTER ---- */
   shell += '<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" aria-label="Back to top">'
     + '<div class="back-top-ring"></div><svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>'
-    + '<a href="https://wa.me/213558253614" target="_blank" class="float-wa" id="floatWa" aria-label="WhatsApp">' + waSvg + '</a>'
+    + '<a href="https://wa.me/213541920113" target="_blank" class="float-wa" id="floatWa" aria-label="WhatsApp">' + waSvg + '</a>'
     + '<footer class="site-footer" id="siteFooter">'
     + '<div class="footer-logo" style="cursor:pointer" onclick="location.reload()">'
     + '<div class="logo-icon app-logo" aria-hidden="true">'+logoMarkup('fR')+'</div>'
@@ -507,7 +507,7 @@
   const SP_NAMES_FR=['Sarah','Fatima','Leila','Nour','Aya','Meriem','Khadija','Houda','Salma','Yasmine'];
   const SP_CITIES=['بومرداس','الجزائر','تيزي وزو','بجاية','البويرة'];
   const SP_PRODUCTS={
-    mercerie:['خيط كوتون أزرق','إبر خياطة','أزرار لؤلؤ','شريط مطاطي','خيط كركم'],
+    mercerie:['ميروار كبير','نقران ملكي','حوامل حلويات','ديكور مناسبات','أطباق تقديم'],
     rental:['جهاز كوافير','طاولة طعام فخمة','كرسي عريس','ستارة ورد','إضاءة حفلات'],
     patisserie:['كيكة شوكولاتة','ماكرون فراولة','تارت فواكه','كيكة زفاف','كوكيز بالشوكولاتة']
   };

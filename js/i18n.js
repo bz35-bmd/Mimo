@@ -3,7 +3,7 @@
    ====================================================== */
 const T = {
   tab_home:{ar:'الرئيسية',fr:'Accueil',en:'Home'},
-  tab_mercerie:{ar:'ميمو مرسيري',fr:'M Mercerie',en:'M Mercerie'},
+  tab_mercerie:{ar:'ميمو ديكور',fr:'M Déco',en:'M Deco'},
   tab_rental:{ar:'ميمو أفراح',fr:'M Afrah',en:'M Afrah'},
   tab_patisserie:{ar:'ميمو كيك',fr:'M Cake',en:'M Cake'},
   home_title:{ar:'مرحبًا بكِ في<br><span>عالم ميمو</span> ✨',fr:'Bienvenue dans<br><span>l\'univers M</span> ✨',en:'Welcome to<br><span>the M world</span> ✨'},
@@ -46,7 +46,7 @@ const T = {
   chat_placeholder:{ar:'اكتبي سؤالك...',fr:'Écrivez votre question...',en:'Type your question...'},
   chat_welcome:{ar:'مرحبًا! 👋 أنا مساعد ميمو. كيف أساعدك اليوم؟',fr:'Bonjour! 👋 Je suis l\'assistant M. Comment puis-je vous aider?',en:'Hello! 👋 I\'m the M assistant. How can I help?'},
   chat_no_results:{ar:'لم أجد إجابة. تواصلي معنا عبر واتساب!',fr:'Pas de réponse. Contactez-nous sur WhatsApp!',en:'No answer found. Contact us on WhatsApp!'},
-  chat_btn_mercerie:{ar:'🛍️ ميمو مرسيري',fr:'🛍️ M Mercerie',en:'🛍️ M Mercerie'},
+  chat_btn_mercerie:{ar:'🎀 ميمو ديكور',fr:'🎀 M Déco',en:'🎀 M Deco'},
   chat_btn_rental:{ar:'💒 ميمو أفراح',fr:'💒 M Afrah',en:'💒 M Afrah'},
   chat_btn_patisserie:{ar:'🎂 ميمو كيك',fr:'🎂 M Cake',en:'🎂 M Cake'},
   chat_btn_prices:{ar:'💰 الأسعار',fr:'💰 Prix',en:'💰 Prices'},

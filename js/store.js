@@ -110,7 +110,7 @@ function openQuickView(title,price,desc,imageUrl,whatsapp,waText){
   document.getElementById('qvDesc').textContent=desc||(currentLang==='ar'?'منتج مميز بجودة عالية.':currentLang==='fr'?'Produit de haute qualité.':'High-quality product.');
   const imgContainer=document.getElementById('qvImg');
   if(imageUrl){imgContainer.innerHTML='<img src="'+imageUrl+'" alt="'+title+'">';}
-  else{imgContainer.innerHTML='<div class="qv-placeholder">✂️</div>';}
+  else{imgContainer.innerHTML='<div class="qv-placeholder">🎀</div>';}
   const badges=['hot','new','limited'];
   const labels=['🔥 '+((currentLang==='ar'?'الأكثر مبيعًا':currentLang==='fr'?'Best-seller':'Best-seller')),'✨ '+((currentLang==='ar'?'جديد':currentLang==='fr'?'Nouveau':'New')),'⚡ '+((currentLang==='ar'?'Stock limité':currentLang==='fr'?'Stock limité':'Limited stock'))];
   const badgeIdx=Math.floor(Math.random()*3);

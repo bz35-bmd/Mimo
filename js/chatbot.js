@@ -4,31 +4,31 @@
 const FAQ_DATA = {
   mercerie: {
     ar: {
-      title: 'ميمو مرسيري',
-      desc: 'متجر خيوط وأزرار ومستلزمات الخياطة في بوعردون بومرداس.',
-      products: 'نقدم خيوط كوتون، إبر خياطة، أزرار لؤلؤ، شرائط مطاطية، دبابيس، مقصات، وأكثر.',
-      prices: 'الأسعار تبدأ من <span class="ltr-num">50</span> دج. اطلبي عبر واتساب لمعرفة التفاصيل.',
+      title: 'ميمو ديكور',
+      desc: 'متجر ديكور المناسبات في يسر بومرداس: نُقران، ميروارات، حوامل وعرض.',
+      products: 'نقدم نُقران، ميروارات، حوامل للحلويات والهدايا، وديكور مناسبات كامل.',
+      prices: 'الأسعار تبدأ من <span class="ltr-num">300</span> دج. اطلبي عبر واتساب لمعرفة التفاصيل.',
       hours: 'نعمل يوميًا من <span class="ltr-num">9:00</span> صباحًا إلى <span class="ltr-num">6:00</span> مساءً.',
-      location: 'بوعردون، ولاية بومرداس.',
-      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
+      location: 'يسر، ولاية بومرداس.',
+      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
     },
     fr: {
-      title: 'M Mercerie',
-      desc: 'Magasin de fils, boutons et fournitures de couture à Bouârdoun, Boumerdès.',
-      products: 'Nous proposons du fil coton, des aiguilles, des boutons perle, des rubans élastiques, des épingles, des ciseaux et plus.',
-      prices: 'Les prix commencent à 50 DA. Commandez via WhatsApp pour les détails.',
+      title: 'M Déco',
+      desc: 'Boutique de décoration d\'événements à Isser, Boumerdès : nappes, plateaux miroirs, présentoirs.',
+      products: 'Nous proposons des nappes, des plateaux miroirs, des présentoirs à gâteaux et cadeaux, et de la décoration de fête.',
+      prices: 'Les prix commencent à 300 DA. Commandez via WhatsApp pour les détails.',
       hours: 'Ouvert tous les jours de 9h à 18h.',
-      location: 'Bouârdoun, Wilaya de Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      location: 'Isser, Wilaya de Boumerdès.',
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     },
     en: {
-      title: 'M Mercerie',
-      desc: 'Sewing supplies shop in Bouârdoun, Boumerdès.',
-      products: 'We offer cotton thread, sewing needles, pearl buttons, elastic bands, pins, scissors and more.',
-      prices: 'Prices start from 50 DA. Order via WhatsApp for details.',
+      title: 'M Deco',
+      desc: 'Event decor shop in Isser, Boumerdès: tablecloths, mirror trays, stands.',
+      products: 'We offer tablecloths, mirror trays, stands for sweets and gifts, and full event decor.',
+      prices: 'Prices start from 300 DA. Order via WhatsApp for details.',
       hours: 'Open daily from 9am to 6pm.',
-      location: 'Bouârdoun, Boumerdès Province.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      location: 'Isser, Boumerdès Province.',
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     }
   },
   rental: {
@@ -39,7 +39,7 @@ const FAQ_DATA = {
       prices: 'الأسعار حسب الكمية والنوع. تواصلي معنا للحصول على عرض سعر مجاني.',
       hours: 'متاحون للحجز يوميًا. التوصيل والتركيب مجانيان في بومرداس والجزائر العاصمة.',
       location: 'بومرداس والجزائر العاصمة.',
-      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
+      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
     },
     fr: {
       title: 'M Afrah',
@@ -48,7 +48,7 @@ const FAQ_DATA = {
       prices: 'Les prix dépendent de la quantité et du type. Contactez-nous pour un devis gratuit.',
       hours: 'Disponible tous les jours. Livraison et montage gratuits à Boumerdès et Alger.',
       location: 'Boumerdès et Alger.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     },
     en: {
       title: 'M Afrah',
@@ -57,7 +57,7 @@ const FAQ_DATA = {
       prices: 'Prices depend on quantity and type. Contact us for a free quote.',
       hours: 'Available daily. Free delivery & setup in Boumerdès and Algiers.',
       location: 'Boumerdès and Algiers.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     }
   },
   patisserie: {
@@ -68,7 +68,7 @@ const FAQ_DATA = {
       prices: 'الأسعار تبدأ من <span class="ltr-num">2,000</span> دج حسب الحجم والتصميم.',
       hours: 'نعمل يوميًا من <span class="ltr-num">10:00</span> صباحًا إلى <span class="ltr-num">8:00</span> مساءً.',
       location: 'بومرداس.',
-      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
+      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
     },
     fr: {
       title: 'M Cake',
@@ -77,7 +77,7 @@ const FAQ_DATA = {
       prices: 'Les prix commencent à 2000 DA selon la taille et le design.',
       hours: 'Ouvert tous les jours de 10h à 20h.',
       location: 'Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     },
     en: {
       title: 'M Cake',
@@ -86,7 +86,7 @@ const FAQ_DATA = {
       prices: 'Prices start from 2000 DA depending on size and design.',
       hours: 'Open daily from 10am to 8pm.',
       location: 'Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
     }
   }
 };
@@ -123,7 +123,7 @@ const FAQ_DATA = {
         en:'Hello! I\'m the M assistant 🤖 How can I help you today?'
       };
       typeThenReply(greeting[currentLang],[
-        {label:'✂️ '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
+        {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
         {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
         {label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')},
         {label:'💰 '+T.chat_btn_prices[currentLang],action:()=>showTopic('prices')},
@@ -177,28 +177,28 @@ const FAQ_DATA = {
   function showTopic(topic){
     const msgs={
       prices:{
-        ar:'💰 <strong>الأسعار:</strong><br><br>✂️ ميمو مرسيري: يبدأ من <span class="ltr-num">50</span> دج<br>💒 ميمو أفراح: حسب الكمية والنوع<br>🎂 ميمو كيك: يبدأ من <span class="ltr-num">2,000</span> دج<br><br>💬 للحصول على عرض سعر مجاني، تواصل معنا عبر واتساب!',
-        fr:'💰 <strong>Prix:</strong><br><br>✂️ M Mercerie: à partir de 50 DA<br>💒 M Afrah: selon la quantité<br>🎂 M Cake: à partir de 2000 DA<br><br>💬 Pour un devis gratuit, contactez-nous via WhatsApp !',
-        en:'💰 <strong>Prices:</strong><br><br>✂️ M Mercerie: from 50 DA<br>💒 M Afrah: depending on quantity<br>🎂 M Cake: from 2000 DA<br><br>💬 For a free quote, reach us via WhatsApp!'
+        ar:'💰 <strong>الأسعار:</strong><br><br>🎀 ميمو ديكور: يبدأ من <span class="ltr-num">300</span> دج<br>💒 ميمو أفراح: حسب الكمية والنوع<br>🎂 ميمو كيك: يبدأ من <span class="ltr-num">2,000</span> دج<br><br>💬 للحصول على عرض سعر مجاني، تواصل معنا عبر واتساب!',
+        fr:'💰 <strong>Prix:</strong><br><br>🎀 M Déco: à partir de 300 DA<br>💒 M Afrah: selon la quantité<br>🎂 M Cake: à partir de 2000 DA<br><br>💬 Pour un devis gratuit, contactez-nous via WhatsApp !',
+        en:'💰 <strong>Prices:</strong><br><br>🎀 M Deco: from 300 DA<br>💒 M Afrah: depending on quantity<br>🎂 M Cake: from 2000 DA<br><br>💬 For a free quote, reach us via WhatsApp!'
       },
       hours:{
-        ar:'🕐 <strong>ساعات العمل:</strong><br><br>✂️ ميمو مرسيري: <span class="ltr-num">9:00</span> صباحًا — <span class="ltr-num">6:00</span> مساءً<br>💒 ميمو أفراح: متاحون يوميًا للحجز<br>🎂 ميمو كيك: <span class="ltr-num">10:00</span> صباحًا — <span class="ltr-num">8:00</span> مساءً',
-        fr:'🕐 <strong>Horaires:</strong><br><br>✂️ M Mercerie: 9h — 18h<br>💒 M Afrah: disponible tous les jours<br>🎂 M Cake: 10h — 20h',
-        en:'🕐 <strong>Hours:</strong><br><br>✂️ M Mercerie: 9am — 6pm<br>💒 M Afrah: available daily<br>🎂 M Cake: 10am — 8pm'
+        ar:'🕐 <strong>ساعات العمل:</strong><br><br>🎀 ميمو ديكور: <span class="ltr-num">9:00</span> صباحًا — <span class="ltr-num">6:00</span> مساءً<br>💒 ميمو أفراح: متاحون يوميًا للحجز<br>🎂 ميمو كيك: <span class="ltr-num">10:00</span> صباحًا — <span class="ltr-num">8:00</span> مساءً',
+        fr:'🕐 <strong>Horaires:</strong><br><br>🎀 M Déco: 9h — 18h<br>💒 M Afrah: disponible tous les jours<br>🎂 M Cake: 10h — 20h',
+        en:'🕐 <strong>Hours:</strong><br><br>🎀 M Deco: 9am — 6pm<br>💒 M Afrah: available daily<br>🎂 M Cake: 10am — 8pm'
       },
       contact:{
-        ar:'📞 <strong>تواصل معنا:</strong><br><br>📱 واتساب: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 بومرداس، الجزائر<br><br>💬 جميع المشاريع الثلاثة في خدمةك!',
-        fr:'📞 <strong>Contactez-nous:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 Boumerdès, Algérie<br><br>💬 Toutes nos entreprises sont à votre service !',
-        en:'📞 <strong>Contact Us:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 Boumerdès, Algeria<br><br>💬 All three businesses at your service!'
+        ar:'📞 <strong>تواصل معنا:</strong><br><br>📱 واتساب: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 بومرداس، الجزائر<br><br>💬 جميع المشاريع الثلاثة في خدمةك!',
+        fr:'📞 <strong>Contactez-nous:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 Boumerdès, Algérie<br><br>💬 Toutes nos entreprises sont à votre service !',
+        en:'📞 <strong>Contact Us:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 Boumerdès, Algeria<br><br>💬 All three businesses at your service!'
       },
       location:{
-        ar:'📍 <strong>الموقع:</strong><br><br>🏢 نقع في بوعردون، ولاية بومرداس، الجزائر.<br>🚗 خدمة التوصيل والتركيب متاحة في بومرداس والجزائر العاصمة.',
-        fr:'📍 <strong>Localisation:</strong><br><br>🏢 Nous sommes à Bouârdoun, Wilaya de Boumerdès, Algérie.<br>🚗 Livraison et montage disponibles à Boumerdès et Alger.',
-        en:'📍 <strong>Location:</strong><br><br>🏢 We are in Bouârdoun, Boumerdès Province, Algeria.<br>🚗 Delivery & setup available in Boumerdès and Algiers.'
+        ar:'📍 <strong>الموقع:</strong><br><br>🏢 نقع في يسر، ولاية بومرداس، الجزائر.<br>🚗 خدمة التوصيل والتركيب متاحة في بومرداس والجزائر العاصمة.',
+        fr:'📍 <strong>Localisation:</strong><br><br>🏢 Nous sommes à Isser, Wilaya de Boumerdès, Algérie.<br>🚗 Livraison et montage disponibles à Boumerdès et Alger.',
+        en:'📍 <strong>Location:</strong><br><br>🏢 We are in Isser, Boumerdès Province, Algeria.<br>🚗 Delivery & setup available in Boumerdès and Algiers.'
       }
     };
     typeThenReply(msgs[topic][currentLang],[
-      {label:'✂️ '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
+      {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
       {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
       {label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')},
       {label:currentLang==='ar'?'← رجوع':currentLang==='fr'?'← Retour':'← Back',action:goHome}
@@ -211,7 +211,7 @@ const FAQ_DATA = {
       en:'How can I help you?'
     };
     typeThenReply(greeting[currentLang],[
-      {label:'✂️ '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
+      {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
       {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
       {label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')},
       {label:'💰 '+T.chat_btn_prices[currentLang],action:()=>showTopic('prices')},
@@ -226,13 +226,13 @@ const FAQ_DATA = {
     $chat.input.value='';
     $chat.pills.innerHTML='';
     const lower=text.toLowerCase();
-    const arMercerie=['مرسيري','خيوط','خيط','أزرار','إبر','خياطة','دبابيس','مقص','شريط','كوتون','سحاب','زر'];
-    const arRental=['أفراح','أعراس','زفاف','حفلات','طاولات','كراسي','ديكور','إضاءة','خيام','كنب','مسارح','بيت صور'];
+    const arMercerie=['ديكور','نقران','نُقران','ميروار','ميروارات','حوامل','زينة','تزيين','كريستال','خدمة'];
+    const arRental=['أفراح','أعراس','زفاف','حفلات','طاولات','كراسي','إضاءة','خيام','كنب','مسارح','بيت صور'];
     const arCake=['كيك','كعكة','كب كيك','شوكولاتة','ميلاد','فراولة','تارت','ميني كيك'];
-    const frMercerie=['mercerie','fil','bouton','aiguille','couture','épingle','ciseau','fermeture','ruban','perle'];
-    const frRental=['afrah','location','mariage','table','chaise','décor','tente','estrade','éclairage','paravent'];
+    const frMercerie=['deco','nappe','plateau','miroir','présentoir','décor','décoration'];
+    const frRental=['afrah','location','mariage','table','chaise','tente','estrade','éclairage','paravent'];
     const frCake=['cake','gâteau','cupcake','chocolat','anniversaire','fraise','tarte','pâtisserie'];
-    const enMercerie=['mercerie','thread','button','needle','sewing','pin','scissor','zipper','ribbon','elastic'];
+    const enMercerie=['deco','tablecloth','mirror','tray','stand','decor','decoration'];
     const enRental=['rental','afrah','wedding','table','chair','decor','tent','stage','lighting','backdrop'];
     const enCake=['cake','cupcake','chocolate','birthday','strawberry','tart','pastry','patisserie'];
     const greetings=['مرحبا','السلام عليكم','سلام','هاي','هلو','bonjour','salut','hello','hi','hey','bonsoir'];
@@ -245,7 +245,7 @@ const FAQ_DATA = {
         en:'Welcome to M! 👋 How can I help you? Choose an option:'
       };
       typeThenReply(msgs[currentLang],[
-        {label:'✂️ '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
+        {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
         {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
         {label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')}
       ]);
@@ -282,12 +282,12 @@ const FAQ_DATA = {
   let zenSeq=0;
   function showNoResult(){
     const noResult={
-      ar:'عذرًا، لم أفهم سؤالك. يمكنك السؤال عن ميمو مرسيري، ميمو أفراح، أو ميمو كيك:',
-      fr:'Désolé, je n\'ai pas compris. Posez une question sur M Mercerie, M Afrah ou M Cake :',
-      en:'Sorry, I didn\'t understand. You can ask about M Mercerie, M Afrah, or M Cake:'
+      ar:'عذرًا، لم أفهم سؤالك. يمكنك السؤال عن ميمو ديكور، ميمو أفراح، أو ميمو كيك:',
+      fr:'Désolé, je n\'ai pas compris. Posez une question sur M Déco, M Afrah ou M Cake :',
+      en:'Sorry, I didn\'t understand. You can ask about M Deco, M Afrah, or M Cake:'
     };
     typeThenReply(noResult[currentLang],[
-      {label:'✂️ '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
+      {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
       {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
       {label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')},
       {label:'📞 '+T.chat_btn_contact[currentLang],action:()=>showTopic('contact')}

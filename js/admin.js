@@ -68,8 +68,8 @@ const T = {
    ====================================================== */
 const BIZ = {
   mercerie: {
-    id:'mercerie', emoji:'✂️',
-    name:{ar:'ميمو مرسيري',fr:'M Mercerie',en:'M Mercerie'},
+    id:'mercerie', emoji:'🎀',
+    name:{ar:'ميمو ديكور',fr:'M Déco',en:'M Deco'},
     table_products:'mercerie_products', table_articles:'mercerie_articles',
     storage_bucket:'mimo-images'
   },
@@ -336,7 +336,7 @@ function renderOrders(){
     const items=(o.items&&o.items.length)?o.items:[];
     const itemsHtml=items.map(it=>`<div class="order-item-row"><span>${it.title||''}</span><b>${it.price||''}</b></div>`).join('');
     const selOpts=STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${orderStatusLabel(s,currentLang)}</option>`).join('');
-    const waLink='https://wa.me/'+(b?b.whatsapp:'213558253614')+'?text='+encodeURIComponent(o.whatsapp_message||'');
+    const waLink='https://wa.me/'+(b?b.whatsapp:'213541920113')+'?text='+encodeURIComponent(o.whatsapp_message||'');
     const fmtDate=(()=>{ try{ return new Date(o.created_at).toLocaleDateString(currentLang==='ar'?'ar-DZ':currentLang==='fr'?'fr-FR':'en-US',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return o.created_at; } })();
     return `<div class="order-card">
       <div class="order-top">
