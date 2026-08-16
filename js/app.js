@@ -1039,7 +1039,7 @@ setInterval(()=>showSocialProof(),25000);
    ====================================================== */
 const AUTH_CF = {login:'cfTurnstileLogin', register:'cfTurnstileRegister', forgot:'cfTurnstileForgot'};
 const SITE_URL = location.protocol+'//'+location.host+(location.pathname||'/');
-const TURNSTILE_SITE_KEY = ""; /* ← Collez ici votre Cloudflare Turnstile Site Key */
+const TURNSTILE_SITE_KEY = "0x4AAAAAAEPFG1ffhmrj9MDc"; /* ← Collez ici votre Cloudflare Turnstile Site Key */
 let authUser=null;
 let cfWidgets={};
 
