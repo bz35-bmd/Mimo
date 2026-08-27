@@ -1180,32 +1180,6 @@ html[data-theme="light"] .footer-logo .logo-icon, html[data-theme="rose"] .foote
 .footer-copy { color:var(--text-muted); font-size:.82rem; }
 
 /* ======================================================
-   CONVERSION — SOCIAL PROOF TOAST
-   ====================================================== */
-.social-proof {
-  position:fixed; left:28px; z-index:160; top:50%;
-  display:flex; align-items:center; gap:12px;
-  padding:14px 20px; border-radius:var(--r-lg);
-  background:var(--bg-card); border:1px solid var(--border);
-  box-shadow:var(--shadow-lg);
-  transform:translateX(-120%) translateY(-50%); opacity:0;
-  transition:all .5s cubic-bezier(.4,0,.2,1);
-  max-width:340px; pointer-events:none;
-}
-.social-proof.show { transform:translateX(0) translateY(-50%); opacity:1; pointer-events:auto; }
-.social-proof .sp-avatar {
-  width:42px; height:42px; border-radius:50%; flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.2rem;
-}
-.social-proof .sp-info { flex:1; }
-.social-proof .sp-info .sp-name { font-weight:700; font-size:.88rem; color:var(--text); }
-.social-proof .sp-info .sp-action { font-size:.78rem; color:var(--text-secondary); }
-.social-proof .sp-info .sp-time { font-size:.7rem; color:var(--text-muted); margin-top:2px; }
-.social-proof .sp-close { color:var(--text-muted); font-size:1rem; padding:4px; }
-
-/* ======================================================
    CONVERSION — QUICK VIEW MODAL
    ====================================================== */
 .qv-overlay {
@@ -1435,51 +1409,6 @@ html[data-theme="light"] .footer-logo .logo-icon, html[data-theme="rose"] .foote
 .trust-badge .tb-text p { font-size:.75rem; color:var(--text-muted); }
 
 /* ======================================================
-   CONVERSION — EXIT POPUP
-   ====================================================== */
-.exit-popup {
-  position:fixed; inset:0; background:rgba(0,0,0,.7);
-  backdrop-filter:blur(8px); z-index:320;
-  display:flex; align-items:center; justify-content:center; padding:20px;
-  opacity:0; pointer-events:none; transition:opacity .4s;
-}
-.exit-popup.show { opacity:1; pointer-events:auto; }
-.exit-box {
-  background:var(--bg-elevated); border:1px solid var(--border);
-  border-radius:var(--r-xl); padding:48px 40px; max-width:440px; width:100%;
-  text-align:center; position:relative;
-  box-shadow:var(--shadow-lg);
-  transform:scale(.9); transition:transform .4s cubic-bezier(.4,0,.2,1);
-}
-.exit-popup.show .exit-box { transform:scale(1); }
-.exit-box .exit-emoji { font-size:3.5rem; margin-bottom:16px; }
-.exit-box h3 { font-size:1.4rem; margin-bottom:10px; }
-.exit-box p { color:var(--text-secondary); font-size:.95rem; margin-bottom:24px; line-height:1.7; }
-.exit-box .exit-offer {
-  padding:16px; border-radius:var(--r-md);
-  background:linear-gradient(135deg,var(--accent-glow),rgba(0,210,160,.08));
-  border:1px dashed var(--accent);
-  margin-bottom:24px;
-}
-.exit-box .exit-offer .offer-text { font-size:.88rem; font-weight:700; color:var(--accent); }
-.exit-box .exit-actions { display:flex; gap:12px; justify-content:center; }
-.exit-box .exit-actions .exit-wa {
-  padding:14px 32px; border-radius:var(--r-full);
-  background:linear-gradient(135deg,var(--wa),var(--wa-dark));
-  color:#fff; font-weight:700; font-size:.95rem;
-  display:flex; align-items:center; gap:8px;
-}
-.exit-box .exit-actions .exit-close {
-  padding:14px 24px; border-radius:var(--r-full);
-  background:var(--surface); border:1px solid var(--border);
-  color:var(--text-secondary); font-weight:600;
-}
-.exit-box .exit-close-x {
-  position:absolute; top:16px; left:16px;
-  color:var(--text-muted); font-size:1.2rem;
-}
-
-/* ======================================================
    CONVERSION — PRODUCT CARD ENHANCED
    ====================================================== */
 .product-card .card-badges {
@@ -1562,8 +1491,6 @@ html[data-theme="light"] .footer-logo .logo-icon, html[data-theme="rose"] .foote
   .modal-box { padding:28px 24px; }
   .qv-box { grid-template-columns:1fr; }
   .qv-img { min-height:200px; }
-  .social-proof { left:12px; right:12px; max-width:calc(100% - 24px); top:auto; bottom:160px; transform:translateY(120%); }
-  .social-proof.show { transform:translateY(0); }
   .sticky-cta.visible { display:flex; }
   .trust-badge { padding:12px 16px; }
   .trust-badge .tb-text h4 { font-size:.8rem; }
@@ -1594,11 +1521,6 @@ html[data-anim] .dash-hero-text.reveal,
 html[data-anim] .dash-hero-visual.reveal { opacity:1 !important; transform:none !important; transition:none !important; }
 
 /* --- Elements décoratifs des variantes --- */
-.hero-eyebrow {
-  display:inline-block; font-size:.78rem; color:var(--gold);
-  background:rgba(249,202,36,.09); border:1px solid rgba(249,202,36,.25);
-  padding:6px 14px; border-radius:999px; margin-bottom:16px;
-}
 .hero-thread {
   position:absolute; inset:0; width:100%; height:100%; pointer-events:none;
   display:none; z-index:1; overflow:visible;
@@ -1623,7 +1545,6 @@ html[data-anim] .orbit-dot {
 
 /* --- VARIANTE A : minimal reveal (~700ms) --- */
 html[data-anim="a"] { --dot-in:anim-dot-a; --dot-dur:.6s; --dot-delay:.3s; --dot-ease:cubic-bezier(.22,1,.36,1); }
-html[data-anim="a"] .dash-hero-text .hero-eyebrow { animation:anim-rise .7s cubic-bezier(.22,1,.36,1) both; }
 html[data-anim="a"] .dash-hero-text h1 { animation:anim-rise .7s cubic-bezier(.22,1,.36,1) 80ms both; }
 html[data-anim="a"] .dash-hero-text p { animation:anim-rise .7s cubic-bezier(.22,1,.36,1) 160ms both; }
 html[data-anim="a"] .dash-hero-text .hero-btns-container { animation:anim-rise .7s cubic-bezier(.22,1,.36,1) 240ms both; }
@@ -1645,7 +1566,6 @@ html[data-anim="b"] .orbit-ring { animation:anim-fade .6s ease 600ms both; }
 html[data-anim="b"] .dot-mercerie { --dot-delay:.8s; }
 html[data-anim="b"] .dot-rental { --dot-delay:1s; }
 html[data-anim="b"] .dot-patisserie { --dot-delay:1.2s; }
-html[data-anim="b"] .dash-hero-text .hero-eyebrow { animation:anim-rise .6s cubic-bezier(.22,1,.36,1) 1.05s both; }
 html[data-anim="b"] .dash-hero-text h1 { animation:anim-rise .6s cubic-bezier(.22,1,.36,1) 1.15s both; }
 html[data-anim="b"] .dash-hero-text p { animation:anim-rise .6s cubic-bezier(.22,1,.36,1) 1.25s both; }
 html[data-anim="b"] .dash-hero-text .hero-btns-container { animation:anim-rise .6s cubic-bezier(.22,1,.36,1) 1.35s both; }
@@ -1664,7 +1584,6 @@ html[data-anim="c"] .orbit-ring { animation:anim-fade .6s ease 500ms both; }
 html[data-anim="c"] .dot-mercerie { --dot-delay:.45s; }
 html[data-anim="c"] .dot-rental { --dot-delay:.65s; }
 html[data-anim="c"] .dot-patisserie { --dot-delay:.85s; }
-html[data-anim="c"] .dash-hero-text .hero-eyebrow { animation:anim-soft .6s cubic-bezier(.22,1,.36,1) 500ms both; }
 html[data-anim="c"] .dash-hero-text h1 { animation:anim-soft .7s cubic-bezier(.22,1,.36,1) 600ms both; }
 html[data-anim="c"] .dash-hero-text p { animation:anim-soft .6s cubic-bezier(.22,1,.36,1) 750ms both; }
 html[data-anim="c"] .dash-hero-text .hero-btns-container { animation:anim-soft .6s cubic-bezier(.22,1,.36,1) 900ms both; }
@@ -1726,7 +1645,6 @@ html[data-anim="c"] .biz-card:nth-child(3) { animation:anim-card .8s cubic-bezie
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html[data-anim] .dash-hero-text .hero-eyebrow,
   html[data-anim] .dash-hero-text h1,
   html[data-anim] .dash-hero-text p,
   html[data-anim] .dash-hero-text .hero-btns-container,
