@@ -10,7 +10,7 @@ const FAQ_DATA = {
       prices: 'الأسعار تبدأ من <span class="ltr-num">300</span> دج. اطلبي عبر واتساب لمعرفة التفاصيل.',
       hours: 'نعمل يوميًا من <span class="ltr-num">9:00</span> صباحًا إلى <span class="ltr-num">6:00</span> مساءً.',
       location: 'يسر، ولاية بومرداس.',
-      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
+      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
     },
     fr: {
       title: 'M Déco',
@@ -19,7 +19,7 @@ const FAQ_DATA = {
       prices: 'Les prix commencent à 300 DA. Commandez via WhatsApp pour les détails.',
       hours: 'Ouvert tous les jours de 9h à 18h.',
       location: 'Isser, Wilaya de Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     },
     en: {
       title: 'M Deco',
@@ -28,7 +28,7 @@ const FAQ_DATA = {
       prices: 'Prices start from 300 DA. Order via WhatsApp for details.',
       hours: 'Open daily from 9am to 6pm.',
       location: 'Isser, Boumerdès Province.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     }
   },
   rental: {
@@ -39,7 +39,7 @@ const FAQ_DATA = {
       prices: 'الأسعار حسب الكمية والنوع. تواصلي معنا للحصول على عرض سعر مجاني.',
       hours: 'متاحون للحجز يوميًا. التوصيل والتركيب مجانيان في بومرداس والجزائر العاصمة.',
       location: 'بومرداس والجزائر العاصمة.',
-      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
+      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
     },
     fr: {
       title: 'M Afrah',
@@ -48,7 +48,7 @@ const FAQ_DATA = {
       prices: 'Les prix dépendent de la quantité et du type. Contactez-nous pour un devis gratuit.',
       hours: 'Disponible tous les jours. Livraison et montage gratuits à Boumerdès et Alger.',
       location: 'Boumerdès et Alger.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     },
     en: {
       title: 'M Afrah',
@@ -57,7 +57,7 @@ const FAQ_DATA = {
       prices: 'Prices depend on quantity and type. Contact us for a free quote.',
       hours: 'Available daily. Free delivery & setup in Boumerdès and Algiers.',
       location: 'Boumerdès and Algiers.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     }
   },
   patisserie: {
@@ -68,7 +68,7 @@ const FAQ_DATA = {
       prices: 'الأسعار تبدأ من <span class="ltr-num">2,000</span> دج حسب الحجم والتصميم.',
       hours: 'نعمل يوميًا من <span class="ltr-num">10:00</span> صباحًا إلى <span class="ltr-num">8:00</span> مساءً.',
       location: 'بومرداس.',
-      contact: 'واتساب: <span class="ltr-num">0541920113</span>'
+      contact: 'واتساب: <span class="ltr-num">0558253614</span>'
     },
     fr: {
       title: 'M Cake',
@@ -77,7 +77,7 @@ const FAQ_DATA = {
       prices: 'Les prix commencent à 2000 DA selon la taille et le design.',
       hours: 'Ouvert tous les jours de 10h à 20h.',
       location: 'Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     },
     en: {
       title: 'M Cake',
@@ -86,7 +86,7 @@ const FAQ_DATA = {
       prices: 'Prices start from 2000 DA depending on size and design.',
       hours: 'Open daily from 10am to 8pm.',
       location: 'Boumerdès.',
-      contact: 'WhatsApp: <span class="ltr-num">0541920113</span>'
+      contact: 'WhatsApp: <span class="ltr-num">0558253614</span>'
     }
   }
 };
@@ -187,9 +187,9 @@ const FAQ_DATA = {
         en:'🕐 <strong>Hours:</strong><br><br>🎀 M Deco: 9am — 6pm<br>💒 M Afrah: available daily<br>🎂 M Cake: 10am — 8pm'
       },
       contact:{
-        ar:'📞 <strong>تواصل معنا:</strong><br><br>📱 واتساب: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 بومرداس، الجزائر<br><br>💬 جميع المشاريع الثلاثة في خدمةك!',
-        fr:'📞 <strong>Contactez-nous:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 Boumerdès, Algérie<br><br>💬 Toutes nos entreprises sont à votre service !',
-        en:'📞 <strong>Contact Us:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213541920113" target="_blank"><span class="ltr-num">0541920113</span></a><br>📍 Boumerdès, Algeria<br><br>💬 All three businesses at your service!'
+        ar:'📞 <strong>تواصل معنا:</strong><br><br>📱 واتساب: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 بومرداس، الجزائر<br><br>💬 جميع المشاريع الثلاثة في خدمةك!',
+        fr:'📞 <strong>Contactez-nous:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 Boumerdès, Algérie<br><br>💬 Toutes nos entreprises sont à votre service !',
+        en:'📞 <strong>Contact Us:</strong><br><br>📱 WhatsApp: <a href="https://wa.me/213558253614" target="_blank"><span class="ltr-num">0558253614</span></a><br>📍 Boumerdès, Algeria<br><br>💬 All three businesses at your service!'
       },
       location:{
         ar:'📍 <strong>الموقع:</strong><br><br>🏢 نقع في يسر، ولاية بومرداس، الجزائر.<br>🚗 خدمة التوصيل والتركيب متاحة في بومرداس والجزائر العاصمة.',
@@ -274,18 +274,42 @@ const FAQ_DATA = {
     }else if(lower.match(/مكان| lieu|location|address|adresse|وين|فين|أين|بومرداس|boumerd|alger|dairah/)){
       showTopic('location');
     }else{
-      askZen(text);
+      askAI(text);
     }
   }
 
-  /* ---------- Assistant IA (OpenCode Zen) ---------- */
-  let zenSeq=0;
+  /* ---------- Assistant IA (Google Gemini via Edge Function) ---------- */
+  let aiSeq=0;
+  function showFallback(text){
+    const lower=text.toLowerCase();
+    const arMercerie=['ديكور','نقران','نُقران','ميروار','ميروارات','حوامل','زينة','تزيين','كريستال','خدمة'];
+    const arRental=['أفراح','أعراس','زفاف','حفلات','طاولات','كراسي','إضاءة','خيام','كنب','مسارح','بيت صور'];
+    const arCake=['كيك','كعكة','كب كيك','شوكولاتة','ميلاد','فراولة','تارت','ميني كيك'];
+    const frMercerie=['deco','nappe','plateau','miroir','présentoir','décor','décoration'];
+    const frRental=['afrah','location','mariage','table','chaise','tente','estrade','éclairage','paravent'];
+    const frCake=['cake','gâteau','cupcake','chocolat','anniversaire','fraise','tarte','pâtisserie'];
+    const enMercerie=['deco','tablecloth','mirror','tray','stand','decor','decoration'];
+    const enRental=['rental','afrah','wedding','table','chair','decor','tent','stage','lighting','backdrop'];
+    const enCake=['cake','cupcake','chocolate','birthday','strawberry','tart','pastry','patisserie'];
+    const greetings=['مرحبا','السلام عليكم','سلام','هاي','هلو','bonjour','salut','hello','hi','hey','bonsoir'];
+    const thanks=['شكرا','ممنون','merci','thanks','thank you','gré'];
+    if(greetings.some(k=>lower.includes(k))){
+      const msgs={ar:'مرحبًا بكم في ميمو! 👋',fr:'Bienvenue chez M ! 👋',en:'Welcome to M! 👋'};
+      typeThenReply(msgs[currentLang],[{label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},{label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},{label:'🎂 '+T.chat_btn_patisserie[currentLang],action:()=>showBiz('patisserie')}]);
+    }else if(thanks.some(k=>lower.includes(k))){
+      const msgs={ar:'على الرحب والسعة! 😊',fr:'Avec plaisir ! 😊',en:'You\'re welcome! 😊'};
+      typeThenReply(msgs[currentLang],[{label:'💰 '+T.chat_btn_prices[currentLang],action:()=>showTopic('prices')},{label:'📞 '+T.chat_btn_contact[currentLang],action:()=>showTopic('contact')}]);
+    }else if(arMercerie.some(k=>lower.includes(k))||frMercerie.some(k=>lower.includes(k))||enMercerie.some(k=>lower.includes(k))){ showBiz('mercerie');
+    }else if(arRental.some(k=>lower.includes(k))||frRental.some(k=>lower.includes(k))||enRental.some(k=>lower.includes(k))){ showBiz('rental');
+    }else if(arCake.some(k=>lower.includes(k))||frCake.some(k=>lower.includes(k))||enCake.some(k=>lower.includes(k))){ showBiz('patisserie');
+    }else if(lower.match(/سعر|prix|price|كم|combien|cost|أرخص|gros|moins/)){ showTopic('prices');
+    }else if(lower.match(/ساع|heure|hour|وقت|temps|open|ouvert|mfto7|مفتوح|fermé|fermeture|clôture/)){ showTopic('hours');
+    }else if(lower.match(/هاتف|tel|phone|تواصل|contact|wa|واتساب|whatsapp|numéro|رقم/)){ showTopic('contact');
+    }else if(lower.match(/مكان| lieu|location|address|adresse|وين|فين|أين|بومرداس|boumerd|alger|dairah/)){ showTopic('location');
+    }else{ showNoResult(); }
+  }
   function showNoResult(){
-    const noResult={
-      ar:'عذرًا، لم أفهم سؤالك. يمكنك السؤال عن ميمو ديكور، ميمو أفراح، أو ميمو كيك:',
-      fr:'Désolé, je n\'ai pas compris. Posez une question sur M Déco, M Afrah ou M Cake :',
-      en:'Sorry, I didn\'t understand. You can ask about M Deco, M Afrah, or M Cake:'
-    };
+    const noResult={ar:'عذرًا، جرّب سؤالًا آخر عن ميمو:',fr:'Désolé, essayez une autre question sur M :',en:'Sorry, try another question about M:'};
     typeThenReply(noResult[currentLang],[
       {label:'🎀 '+T.chat_btn_mercerie[currentLang],action:()=>showBiz('mercerie')},
       {label:'💒 '+T.chat_btn_rental[currentLang],action:()=>showBiz('rental')},
@@ -296,23 +320,29 @@ const FAQ_DATA = {
   function escapeHtml(s){
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function askZen(text){
-    const seq=++zenSeq;
-    if(!sb||!sb.functions){ showNoResult(); return; }
+  function askAI(text){
+    const seq=++aiSeq;
+    var base=(typeof SUPABASE_URL!=='undefined'?SUPABASE_URL:'').replace(/\/+$/,'');
+    var key=(typeof SUPABASE_ANON_KEY!=='undefined'?SUPABASE_ANON_KEY:'');
+    if(!base||!key){ showFallback(text); return; }
     showTyping();
     $chat.pills.innerHTML='';
-    sb.functions.invoke('mimo-assistant',{body:{message:text,lang:currentLang}})
-      .then(({data,error})=>{
-        if(seq!==zenSeq) return;
-        const answer=(data&&data.answer)?data.answer:'';
-        if(error||!answer){ showNoResult(); return; }
+    var url=base+'/functions/v1/mimo-assistant';
+    fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body:JSON.stringify({message:text,lang:currentLang})
+    }).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(data){
+        if(seq!==aiSeq) return;
+        var answer=(data&&data.answer)?data.answer:'';
+        if(!answer){ showFallback(text); return; }
         hideTyping();
         appendMsg(escapeHtml(answer).replace(/\n/g,'<br>'));
         showPills([
           {label:'📞 '+T.chat_btn_contact[currentLang],action:()=>showTopic('contact')},
           {label:currentLang==='ar'?'← رجوع':currentLang==='fr'?'← Retour':'← Back',action:goHome}
         ]);
-      })
-      .catch(()=>{ if(seq===zenSeq) showNoResult(); });
+      }).catch(function(){ if(seq===aiSeq) showFallback(text); });
   }
 })();

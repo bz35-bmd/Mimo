@@ -7,7 +7,7 @@ const BIZ = {
     name:{ar:'ميمو ديكور',fr:'M Déco',en:'M Deco'},
     tagline:{ar:'لمسة سحرية لكل مناسبة',fr:'Une touche magique pour chaque occasion',en:'A magical touch for every occasion'},
     location:{ar:'يسر، بومرداس',fr:'Isser, Boumerdès',en:'Isser, Boumerdès'},
-    phone:'0541 92 01 13', whatsapp:'213541920113',
+    phone:'0558 25 36 14', whatsapp:'213558253614',
     hero_sub:{ar:'ديكور المناسبات: نُقران، ميروارات، حوامل وعرض — مُنظَّم وجاهز للطلب خلال دقيقتين',fr:'Décoration d\'événements : nappes, plateaux miroirs, présentoirs — prêts à commander',en:'Event decor: tablecloths, mirror trays, stands — ready to order'},
     categories:[
       {id:'nappes',title:{ar:'نُقران',fr:'Nappes',en:'Tablecloths'},sub:{ar:'ألوان وتصاميم متنوعة',fr:'Coloris et motifs variés',en:'Many colors & patterns'},icon:'🍽️'},
@@ -38,7 +38,7 @@ const BIZ = {
     name:{ar:'ميمو أفراح',fr:'M Afrah',en:'M Afrah'},
     tagline:{ar:'كل ما يحتاجه عرسك',fr:'Tout pour votre mariage',en:'Everything your wedding needs'},
     location:{ar:'الجزائر العاصمة',fr:'Alger',en:'Algiers'},
-    phone:'0541 92 01 13', whatsapp:'213541920113',
+    phone:'0558 25 36 14', whatsapp:'213558253614',
     hero_sub:{ar:'نؤجّر الطاولات والكراسي والديكور والإضاءة والخيام',fr:'Location de tables, chaises, décoration et tentes',en:'Rent tables, chairs, decor, lighting & tents'},
     categories:[
       {id:'tables',title:{ar:'طاولات',fr:'Tables',en:'Tables'},sub:{ar:'ضيافة وأعياد',fr:'Réception',en:'Reception'},icon:'🪑'},
@@ -70,7 +70,7 @@ const BIZ = {
     name:{ar:'ميمو كيك',fr:'M Cake',en:'M Cake'},
     tagline:{ar:'كعكة أحلامكِ... تُولد هنا',fr:'Votre gâteau de rêve... prend vie ici',en:'Your dream cake... comes to life here'},
     location:{ar:'الجزائر العاصمة',fr:'Alger',en:'Algiers'},
-    phone:'0541 92 01 13', whatsapp:'213541920113',
+    phone:'0558 25 36 14', whatsapp:'213558253614',
     hero_sub:{ar:'كعكات مصممة خصيصًا لكِ، بمكونات فاخرة وتفاصيل مذهلة',fr:'Gâteaux sur mesure avec ingrédients raffinés',en:'Custom cakes with premium ingredients'},
     categories:[
       {id:'wedding',title:{ar:'أعراس',fr:'Mariage',en:'Wedding'},sub:{ar:'تصاميم فاخرة',fr:'Créations raffinées',en:'Elegant designs'},icon:'👰'},

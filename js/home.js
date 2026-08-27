@@ -47,21 +47,6 @@ function renderHome(){
   setTimeout(()=>initReveal(),50);
 }
 
-/* Exit intent */
-(function(){
-  let exitShown=false;
-  function closeExitPopup(){const el=document.getElementById('exitPopup'); if(el) el.classList.remove('show'); exitShown=true;}
-  window.closeExitPopup=closeExitPopup;
-  document.addEventListener('mouseout',e=>{
-    if(exitShown) return;
-    if(e.clientY<5){setTimeout(()=>{const el=document.getElementById('exitPopup'); if(el&&!exitShown) el.classList.add('show');},800);}
-  });
-  document.addEventListener('touchstart',e=>{
-    if(exitShown) return;
-    if(e.touches[0].clientY<5){setTimeout(()=>{const el=document.getElementById('exitPopup'); if(el&&!exitShown) el.classList.add('show');},800);}
-  });
-})();
-
 window.onLangChange=function(){ renderHome(); };
 
 (async function initHome(){

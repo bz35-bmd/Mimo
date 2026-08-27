@@ -1,6 +1,6 @@
 /* ======================================================
    SHELL — chrome partagé : topbar, réglages, nav mobile,
-   footer, recherche, langue, thème, social proof
+   footer, recherche, langue, thème
    ====================================================== */
 (function(){
   const PAGE = document.body.dataset.page||'home';
@@ -8,8 +8,6 @@
   currentBusiness = (PAGE==='mercerie')?'mercerie':null;
 
   const hasChat  = document.body.dataset.chat==='on';
-  const hasSP    = document.body.dataset.sp==='on';
-  const hasExit  = document.body.dataset.exit==='on';
   const hasQV    = document.body.dataset.qv==='on';
   const hasCTA   = document.body.dataset.cta==='on';
 
@@ -170,14 +168,6 @@
     + '</div>'
     + '</nav>';
 
-  /* ---- SOCIAL PROOF ---- */
-  if(hasSP){
-    shell += '<div class="social-proof" id="socialProof">'
-      + '<div class="sp-avatar" id="spAvatar">🛒</div>'
-      + '<div class="sp-info"><div class="sp-name" id="spName">—</div><div class="sp-action" id="spAction">—</div><div class="sp-time" id="spTime">—</div></div>'
-      + '<button class="sp-close" onclick="hideSocialProof()">✕</button></div>';
-  }
-
   /* ---- QUICK VIEW ---- */
   if(hasQV){
     shell += '<div class="qv-overlay" id="qvOverlay" onclick="if(event.target===this)closeQuickView()">'
@@ -193,26 +183,11 @@
       + '</div></div></div>';
   }
 
-  /* ---- EXIT INTENT ---- */
-  if(hasExit){
-    shell += '<div class="exit-popup" id="exitPopup">'
-      + '<div class="exit-box">'
-      + '<button class="exit-close-x" onclick="closeExitPopup()">✕</button>'
-      + '<div class="exit-emoji">🎁</div>'
-      + '<h3 data-i18n="exit_title">انتظري! لديكِ عرض خاص</h3>'
-      + '<p data-i18n="exit_desc">احصلِ على خصم 10% على طلبكِ الأول! استخدمي كود <strong>WELCOME10</strong></p>'
-      + '<div class="exit-offer"><div class="offer-text" data-i18n="exit_offer">✨ كود WELCOME10 — صالح لمدة 24 ساعة</div></div>'
-      + '<div class="exit-actions">'
-      + '<a class="exit-wa" href="https://wa.me/213541920113?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B!%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85%20%D9%83%D9%88%D8%AF%20WELCOME10%20%D9%84%D9%84%D8%AE%D8%B5%D9%85" target="_blank" data-i18n="exit_btn">استخدم العرض الآن</a>'
-      + '<button class="exit-close" onclick="closeExitPopup()" data-i18n="exit_later">لاحقًا</button>'
-      + '</div></div></div>';
-  }
-
   /* ---- STICKY CTA ---- */
   if(hasCTA){
     shell += '<div class="sticky-cta" id="stickyCta">'
       + '<div class="cta-info"><div class="cta-title" id="ctaTitle">ميمو ديكور</div><div class="cta-sub" id="ctaSub">اطلب الآن عبر واتساب</div></div>'
-      + '<a class="cta-wa" id="ctaWa" href="https://wa.me/213541920113" target="_blank">' + waSvg + ' WhatsApp</a>'
+      + '<a class="cta-wa" id="ctaWa" href="https://wa.me/213558253614" target="_blank">' + waSvg + ' WhatsApp</a>'
       + '</div>';
   }
 
@@ -235,7 +210,7 @@
   /* ---- BACK TO TOP / WHATSAPP / FOOTER ---- */
   shell += '<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:\'smooth\'})" aria-label="Back to top">'
     + '<div class="back-top-ring"></div><svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>'
-    + '<a href="https://wa.me/213541920113" target="_blank" class="float-wa" id="floatWa" aria-label="WhatsApp">' + waSvg + '</a>'
+    + '<a href="https://wa.me/213558253614" target="_blank" class="float-wa" id="floatWa" aria-label="WhatsApp">' + waSvg + '</a>'
     + '<footer class="site-footer" id="siteFooter">'
     + '<div class="footer-logo" style="cursor:pointer" onclick="location.reload()">'
     + '<div class="logo-icon app-logo" aria-hidden="true">'+logoMarkup('fR')+'</div>'
@@ -501,42 +476,6 @@
   /* ---- Back to top ---- */
   const backTopEl=document.getElementById('backTop');
   window.addEventListener('scroll',()=>{backTopEl.classList.toggle('visible',window.scrollY>400);},{passive:true});
-
-  /* ---- Social proof ---- */
-  const SP_NAMES_AR=['سارة','فاطمة','ليلى','نور','آية','مريم','خديجة','هدى','سلمى','ياسمين'];
-  const SP_NAMES_FR=['Sarah','Fatima','Leila','Nour','Aya','Meriem','Khadija','Houda','Salma','Yasmine'];
-  const SP_CITIES=['بومرداس','الجزائر','تيزي وزو','بجاية','البويرة'];
-  const SP_PRODUCTS={
-    mercerie:['ميروار كبير','نقران ملكي','حوامل حلويات','ديكور مناسبات','أطباق تقديم'],
-    rental:['جهاز كوافير','طاولة طعام فخمة','كرسي عريس','ستارة ورد','إضاءة حفلات'],
-    patisserie:['كيكة شوكولاتة','ماكرون فراولة','تارت فواكه','كيكة زفاف','كوكيز بالشوكولاتة']
-  };
-  let spTimer=null;
-  window.showSocialProof=function(){
-    const el=document.getElementById('socialProof'); if(!el) return;
-    const isAr=currentLang==='ar';
-    const bizKeys=Object.keys(SP_PRODUCTS);
-    const bizKey=bizKeys[Math.floor(Math.random()*bizKeys.length)];
-    const b=BIZ[bizKey];
-    const prodList=SP_PRODUCTS[bizKey];
-    const prod=prodList[Math.floor(Math.random()*prodList.length)];
-    const name=isAr?SP_NAMES_AR[Math.floor(Math.random()*SP_NAMES_AR.length)]:SP_NAMES_FR[Math.floor(Math.random()*SP_NAMES_FR.length)];
-    const city=SP_CITIES[Math.floor(Math.random()*SP_CITIES.length)];
-    const ago=Math.floor(Math.random()*15)+1;
-    const timeText=isAr?('منذ '+ago+' دقائق'):currentLang==='fr'?('il y a '+ago+' min'):(ago+' min ago');
-    document.getElementById('spAvatar').textContent=b.emoji;
-    document.getElementById('spName').textContent=name+(isAr?' من '+city:' ('+city+')');
-    document.getElementById('spAction').textContent=(isAr?'اشترت للتو':currentLang==='fr'?'a acheté':'bought')+' — '+prod;
-    document.getElementById('spTime').textContent=timeText;
-    el.classList.add('show');
-    clearTimeout(spTimer);
-    spTimer=setTimeout(()=>el.classList.remove('show'),5000);
-  };
-  window.hideSocialProof=function(){const el=document.getElementById('socialProof'); if(el) el.classList.remove('show'); clearTimeout(spTimer);};
-  if(document.getElementById('socialProof')){
-    setTimeout(()=>showSocialProof(),8000);
-    setInterval(()=>showSocialProof(),25000);
-  }
 
   /* ---- Boot ---- */
   applyLanguage(currentLang);
